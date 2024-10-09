@@ -10,14 +10,5 @@ Il vise à reunir tous les acteurs du système national de pharmacovigilance sé
 
 2.𝗧͟𝗲͟𝗰͟𝗵͟𝗻͟𝗼͟𝗹͟𝗼͟𝗴͟𝗶͟𝗲͟𝘀 𝘂͟𝘁͟𝗶͟𝗹͟𝗶͟𝘀͟é͟𝗲͟𝘀͟:
 
--Interface utilisateur:
-*
-
--Gestion des requetes HTTP:
-*Axios
-
--Gestion de l'etat global:
-*Redux
-
--Gestion de l'URl:
-*React Router
+-Backend : Laravel
+-Authentification : Laravel Sanctum 
