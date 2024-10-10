@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id')->constrained();    
+            $table->unsignedBigInteger('user_id')->nullable();
+            
+            // $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();    
             $table->string('type_notification');
             
             //info patient MAPI_EEIM

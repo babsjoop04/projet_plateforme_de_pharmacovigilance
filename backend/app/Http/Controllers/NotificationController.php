@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use Illuminate\Http\Request;
-
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 // use App\Http\Requests\StoreNotificationRequest;
 // use App\Http\Requests\UpdateNotificationRequest;
 
-class NotificationController extends Controller
+class NotificationController extends Controller 
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -70,9 +72,9 @@ class NotificationController extends Controller
             
             // return 'hello MAPI_EEIM';
 
-            $notification=Notification::create($fields);
-
+            $notification=$request->user()->notification()->create($fields);
             return $notification;
+        
 
         }
         elseif ($request->type_notification==="notification_PQIF") {
@@ -103,9 +105,9 @@ class NotificationController extends Controller
        
             ]);
 
-            $notification=Notification::create($fields);
-            return $notification;
-            // return 'hello pqif';
+            // $notification=$request->user() Notification::create($fields);
+            // return $notification;
+            // return $request->user();
 
         }
 
