@@ -28,7 +28,9 @@ class Aggregation_notification_produit_sante extends Model
         "numero_lot", 
         "provenance" ,
         "date_peremption", 
+        "produits_santes",
         "produit_sante_id"
+
         
     ] ;
 

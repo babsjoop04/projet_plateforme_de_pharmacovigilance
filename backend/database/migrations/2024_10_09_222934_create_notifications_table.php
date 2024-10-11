@@ -37,7 +37,6 @@ return new class extends Migration
             $table->string('nom_constatateur')->nullable(); 
             $table->string('adresse_constatateur')->nullable(); 
             $table->string('tel_constatateur')->nullable(); 
-            $table->date('date_signalement_suspicion_pqif')->nullable(); 
             $table->boolean('echantillon_conserve')->nullable(); 
             $table->string('tel_detenteur')->nullable(); 
 
@@ -61,7 +60,7 @@ return new class extends Migration
             
             //données communes
             
-            $table->text("motif_prise_produits_sante");
+            $table->text("motif_prise_produits_sante")->nullable();
             $table->text('description_evenement')->nullable(); 
             $table->date('date_apparition_evenement'); 
             $table->date('date_disparition_evenement'); 
