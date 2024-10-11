@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+            // $table->unsignedBigInteger('user_id')->nullable();
             
-            // $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();    
-            $table->string('type_notification');
+            $table->foreignId('user_id')->constrained();    
+            // $table->string('type_notification');
+            $table->enum('type_notification', ['notification_mapi', 'notification_eeim','notification_pqif']);
             
             //info patient MAPI_EEIM
             $table->integer('numero_dossier_patient')->nullable();

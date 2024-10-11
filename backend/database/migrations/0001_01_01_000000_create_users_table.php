@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->enum('role_utilisateur',["administrateur","consommateur","professionnel_sante","responsable_organisme_reglementation","PRV_exploitant"]);
 
             $table->string('nom');
             $table->string('prenom');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->date('dateNaissance');
             $table->string('profession');
             $table->string('structure_travail')->nullable();
-            $table->string('role');
+            // $table->string('role');
             $table->string('specilité')->nullable();
             $table->boolean('Est_point_focal');
             $table->string('district_localite')->nullable();

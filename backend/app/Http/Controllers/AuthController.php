@@ -19,7 +19,7 @@ class AuthController extends Controller
         'dateNaissance' => 'required|date',
         'profession' => 'required|max:255',
         'structure_travail'=> 'nullable|max:255',
-        'role' => 'required|max:255',
+        'role_utilisateur' => 'required|max:255',
         'specilité' => 'nullable|max:255' ,  
         'Est_point_focal' => 'required|boolean',
         'district_localite'=> 'nullable|max:255',
@@ -54,7 +54,7 @@ class AuthController extends Controller
         //     ];
         // }
 
-        // if ($user->statut === "disabled" ) {
+        // if ($user->statut === "desactivé" ) {
         //     return [
         //         'message' => "Votre compte a été desactivé. Nous vous invitons à contacter à l'adminisrtrateur pour plus d'information"
         //     ];
