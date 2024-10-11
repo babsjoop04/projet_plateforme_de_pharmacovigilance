@@ -49,7 +49,7 @@ class Notification extends Model
         'circonstances_incident',
         'consequence_clinique',
         // 'description_evenement_si_consequence_clinique',
-         
+        'motif_prise_produits_sante',
         'description_evenement',
         'date_apparition_evenement',
         'date_disparition_evenement'
@@ -59,5 +59,9 @@ class Notification extends Model
      public function user(){
         return $this->belongsTo(User::class);
      }
+
+     public function aggregation(){
+      return $this->hasMany(Aggregation_notification_produit_sante::class);
+   }
 
 }

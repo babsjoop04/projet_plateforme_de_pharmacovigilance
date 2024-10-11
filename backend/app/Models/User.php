@@ -31,7 +31,7 @@ class User extends Authenticatable
         'dateNaissance' ,
         'profession' ,
         'structure_travail',
-        'role' ,
+        'role_utilisateur' ,
         'specilité'  ,  
         'Est_point_focal' ,
         'district_localite',

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->enum('role_utilisateur',["administrateur","consommateur","professionnel_sante","responsable_organisme_reglementation","PRV_exploitant"]);
+            // $table->string('role_utilisateur');
+            $table->enum('role_utilisateur',["consommateur","administrateur","professionnel_sante","responsable_organisme_reglementation","PRV_exploitant"]);
 
             $table->string('nom');
             $table->string('prenom');

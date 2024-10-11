@@ -19,7 +19,8 @@ class AuthController extends Controller
         'dateNaissance' => 'required|date',
         'profession' => 'required|max:255',
         'structure_travail'=> 'nullable|max:255',
-        'role_utilisateur' => 'required|max:255',
+        'role_utilisateur' => 'required|in:administrateur,consommateur,professionnel_sante,responsable_organisme_reglementation,PRV_exploitant',
+        // |in:administrateur,consommateur,professionnel_sante,responsable_organisme_reglementation,PRV_exploitant
         'specilité' => 'nullable|max:255' ,  
         'Est_point_focal' => 'required|boolean',
         'district_localite'=> 'nullable|max:255',
@@ -30,6 +31,7 @@ class AuthController extends Controller
         $user=User::create($fields);
 
         return $user;
+        // return $fields;
 
 
     }

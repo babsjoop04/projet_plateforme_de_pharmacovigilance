@@ -60,6 +60,8 @@ return new class extends Migration
             // $table->text('description_evenement_si_consequence_clinique')->nullable(); 
             
             //données communes
+            
+            $table->text("motif_prise_produits_sante");
             $table->text('description_evenement')->nullable(); 
             $table->date('date_apparition_evenement'); 
             $table->date('date_disparition_evenement'); 
