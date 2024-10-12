@@ -31,6 +31,7 @@ class User extends Authenticatable
         'dateNaissance' ,
         'profession' ,
         'structure_travail',
+        'adresse_structure_travail',
         'role_utilisateur' ,
         'specilité'  ,  
         'Est_point_focal' ,
@@ -38,6 +39,14 @@ class User extends Authenticatable
         'email' ,
         'password' ,
         'password_confirmation' ,
+    //prv_exploitant
+       
+        "activite_exploitation" ,
+        "numero_agrement" ,
+        "date_agrement" ,
+        //agence promotion
+        "Nom_laboratoire_représenté_localement" ,
+   
     ];
     
 
@@ -66,5 +75,9 @@ class User extends Authenticatable
 
     public function notification(){
         return $this->hasMany(Notification::class);
+     }
+
+     public function exploitation(){
+        return $this->hasMany(Exploitation::class);
      }
 }

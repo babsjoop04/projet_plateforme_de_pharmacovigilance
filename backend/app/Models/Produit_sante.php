@@ -9,4 +9,7 @@ class Produit_sante extends Model
 {
     use HasFactory;
     protected $fillable = ['nom'];
+
+
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExploitationController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,4 +18,6 @@ Route::post("/logout", [AuthController::class,"logout"])->middleware('auth:sanct
 Route::middleware( 'auth:sanctum')->group(function () {
 
     Route::apiResource("notification",NotificationController::class);
+    Route::apiResource("exploitation",ExploitationController::class);
+
 });

@@ -13,13 +13,13 @@ class NotificationPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return in_array($user->role_utilisateur, ["administrateur","responsable_organisme_reglementation"]);
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Notification $notification): bool
+    public function view(User $user, Notification $notification): void
     {
         //
     }
@@ -29,15 +29,21 @@ class NotificationPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return in_array($user->role_utilisateur, ["consommateur","professionnel_sante","PRV_exploitant"]);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Notification $notification): bool
+    public function update(User $user, Notification $notification): Response
     {
         //
+        //
+        return $user->id===$notification->user_id
+        ?
+        Response::allow() 
+        : 
+        Response::deny("vous n'etes pas proprietaire de cette notification");
     }
 
     /**
@@ -46,12 +52,18 @@ class NotificationPolicy
     public function delete(User $user, Notification $notification): bool
     {
         //
+        return false;
+        // return $user->id===$notification->user_id
+        // ?
+        // Response::allow() 
+        // : 
+        // Response::deny("vous n'etes pas proprietaire de cette notification");
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Notification $notification): bool
+    public function restore(User $user, Notification $notification): void
     {
         //
     }
@@ -61,6 +73,6 @@ class NotificationPolicy
      */
     public function forceDelete(User $user, Notification $notification): bool
     {
-        //
+        return false;
     }
 }

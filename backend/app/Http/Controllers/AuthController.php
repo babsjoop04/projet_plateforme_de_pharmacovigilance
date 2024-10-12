@@ -10,31 +10,91 @@ class AuthController extends Controller
 {
     //
     public function register(Request $request){
-        $fields=$request->validate([
-        'nom' => 'required|max:255' ,
-        'prenom'=> 'required|max:255',
-        'sexe' => 'required|max:255',
-        'adresse' => 'required|max:255',
-        'telephone' => 'required|max:255',
-        'dateNaissance' => 'required|date',
-        'profession' => 'required|max:255',
-        'structure_travail'=> 'nullable|max:255',
-        'role_utilisateur' => 'required|in:administrateur,consommateur,professionnel_sante,responsable_organisme_reglementation,PRV_exploitant',
-        // |in:administrateur,consommateur,professionnel_sante,responsable_organisme_reglementation,PRV_exploitant
-        'specilité' => 'nullable|max:255' ,  
-        'Est_point_focal' => 'required|boolean',
-        'district_localite'=> 'nullable|max:255',
-        'email'=> 'required|email|unique:users' ,
-        'password'=> 'required|confirmed' ,
-        ]);
 
-        $user=User::create($fields);
+        if (in_array($request->role_utilisateur,["consommateur","responsable_organisme_reglementation"])) {
 
-        return $user;
-        // return $fields;
+        //    return "hello cons";
+           $fields=$request->validate([
+           'nom' => 'required|max:255' ,
+           'prenom'=> 'required|max:255',
+           'sexe' => 'required|max:255',
+           'adresse' => 'required|max:255',
+           'telephone' => 'required|max:255',
+           'dateNaissance' => 'required|date',
+           'profession' => 'required|max:255',
+           'structure_travail'=> 'nullable|max:255',
+           'adresse_structure_travail'=> 'nullable|max:255',
+           'role_utilisateur' => 'required',
+           'email'=> 'required|email|unique:users' ,
+           'password'=> 'required|confirmed' 
+           ]);
+   
+           $user=User::create($fields);
+   
+           return $user;
+        }
 
 
-    }
+        if ($request->role_utilisateur==="PRV_exploitant") {
+
+            $fields_prv=$request->validate([
+           'nom' => 'required|max:255' ,
+           'prenom'=> 'required|max:255',
+           'sexe' => 'required|max:255',
+           'adresse' => 'required|max:255',
+           'telephone' => 'required|max:255',
+           'dateNaissance' => 'required|date',
+           'profession' => 'required|max:255',
+           'structure_travail'=> 'nullable|max:255',
+           'adresse_structure_travail'=> 'nullable|max:255',
+           'role_utilisateur' => 'required',
+           'specilité' => 'nullable|max:255' ,  
+           'email'=> 'required|email|unique:users' ,
+           'password'=> 'required|confirmed' ,
+           //prv_exploitant
+           "activite_exploitation"=> 'required' ,
+           "numero_agrement"=> 'required' ,
+           "date_agrement" => 'required',
+           //agence promotion
+           "Nom_laboratoire_représenté_localement" => 'nullable',
+           ]);
+
+           
+           $user=User::create($fields_prv);
+   
+           return $user;
+           }
+        
+
+        if( $request->role_utilisateur=== 'professionnel_sante') {
+            $fields_pro=$request->validate([
+                'nom' => 'required|max:255' ,
+                'prenom'=> 'required|max:255',
+                'sexe' => 'required|max:255',
+                'adresse' => 'required|max:255',
+                'telephone' => 'required|max:255',
+                'dateNaissance' => 'required|date',
+                'profession' => 'required|max:255',
+                'structure_travail'=> 'nullable|max:255',
+                'adresse_structure_travail'=> 'nullable|max:255',
+                'role_utilisateur' => 'required',
+                'specilité' => 'nullable|max:255' ,  
+                'Est_point_focal' => 'required|boolean',
+                'district_localite'=> 'nullable|max:255',
+                'email'=> 'required|email|unique:users' ,
+                'password'=> 'required|confirmed' ,
+                
+                ]);
+        
+                $user=User::create($fields_pro);
+        
+                return $user;
+        }
+
+
+
+
+}
     public function login(Request $request){
 
         $request->validate([
@@ -71,6 +131,7 @@ class AuthController extends Controller
 
     }
     public function logout(Request $request){
+        
         $request->user()->tokens()->delete();
         return "Vous etes deconnecté";
     }

@@ -8,6 +8,7 @@ use App\Models\Aggregation_notification_produit_sante;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
 // use App\Http\Requests\StoreNotificationRequest;
 // use App\Http\Requests\UpdateNotificationRequest;
@@ -18,9 +19,10 @@ class NotificationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        Gate::authorize("viewAny", $request->user());
         return Notification::all();
     }
 
@@ -29,6 +31,8 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+
+        Gate::authorize("create", $request->user());
 
         if ($request->type_notification==="notification_pqif") {
 
@@ -142,122 +146,12 @@ class NotificationController extends Controller
             $notif=$notification->aggregation()->create($produit_sante);
 
         }
+        
         return "aggregation faite avec succes";
         
         
        }
 
-
-
-
-    //    $fields_aggregation_eeim=$request->validate(
-    //     [
-            
-    //         //eeim
-    //         "posologie" =>'required',
-    //         "date_debut_prise"=>'required|date', 
-    //         "date_fin_prise"=>'required|date',      
-    
-    //         "numero_lot"=>'required', 
-    //         "provenance" =>'required',
-    //         "date_peremption"=>'required|date',  
-            
-    //     ] );
-
-       /*
-        if ( in_array($request->type_notification,["notification_mapi","notification_eeim"])) {
-
-            $fields=$request->validate(
-                [
-                    'type_notification'=> 'required|in:notification_mapi,notification_eeim' ,
-                   //info patient MAPI_EEIM
-                    'numero_dossier_patient'=> 'required|max:255',
-                    'prenom_initiale'=> 'required|max:255',
-                    'nom_initiale'=> 'required|max:255',
-                    'adresse_patient'=> 'required|max:255',
-                    'tel_patient'=> 'required|max:255',
-                    'date_naissance_patient'=> 'required|date',
-                    'sexe'=> 'required|max:255',
-                    'antecedentsMedicaux_facteursRisques_facteursAssocies'=> 'required',
-                    'patiente_enceinte'=> 'required|boolean',
-                    'age_gestationnel'=> 'nullable',
-           
-                   //description evenement EEIM-MAPI
-                   //  'description_evenement_EEIM_MAPI',
-                    'readministration'=> 'required|boolean',
-                    'reapparition_apres_readministration'=> 'required|boolean',
-                    'traitement_correcteur'=> 'required|boolean',
-                    'text_traitement_correcteur'=> 'nullable',
-                    'suivi_patient'=> 'required|max:255',
-                    'evolution_situation_patient'=> 'required|max:255',
-           
-                   // 'description_evenement_si_consequence_clinique',
-                   'motif_prise_produits_sante'=>'required',
-                   'description_evenement'=> 'required',
-                   'date_apparition_evenement'=> 'required|date',
-                   'date_disparition_evenement'=> 'required|max:255'
-           
-                ]
-            );
-
-
-
-            
-
-
-
-            
-            // return 'hello MAPI_EEIM';
-
-            $notification=$request->user()->notification()->create($fields);
-            
-
-            if( $request->type_notification === "notification_mapi") {    
-
-                
-
-                // return [
-                //     'notification'=> $notification,
-                //     'aggregation'=> $aggregation
-                // ];
-
-
-            }elseif ($request->type_notification === "notification_eeim") {
-                # code...
-
-                $fields_aggregation=$request->validate(
-                [
-                    // "id_notification", 
-                    // "id_produit_sante", 
-                    //eeim
-                    "posologie" =>'required',
-                    "date_debut_prise"=>'required|date', 
-                    "date_fin_prise"=>'required|date',      
-            
-                    "numero_lot"=>'required', 
-                    "provenance" =>'required',
-                    "date_peremption"=>'required|date',  
-                    
-                ] );
-
-                $aggregation=$notification->aggregation()->create($fields_aggregation);
-
-                return [
-                    'notification'=> $notification,
-                    'aggregation'=> $aggregation
-                ];
-
-
-            }
-
-
-
-            
-            
-        
-
-        }
-        */
 
     
 
@@ -279,6 +173,7 @@ class NotificationController extends Controller
     {
 
         //
+        Gate::authorize("update", $notification);
 
         
         if (in_array($request->type_notification,["notification_mapi","notification_eeim"])) {
@@ -362,6 +257,8 @@ class NotificationController extends Controller
     public function destroy(Notification $notification)
     {
         //
+        Gate::authorize("delete", $notification);
+
         $notification->delete();
         return [
             "message"=>"notification supprimée avec success"

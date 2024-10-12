@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            // $table->string('role_utilisateur');
+            
             $table->enum('role_utilisateur',["consommateur","administrateur","professionnel_sante","responsable_organisme_reglementation","PRV_exploitant"]);
-
+//champs communs 
             $table->string('nom');
             $table->string('prenom');
             $table->string('sexe');
@@ -24,13 +24,25 @@ return new class extends Migration
             $table->date('dateNaissance');
             $table->string('profession');
             $table->string('structure_travail')->nullable();
-            // $table->string('role');
+            $table->string('adresse_structure_travail')->nullable();
+
+            //pro dela sante 
             $table->string('specilité')->nullable();
-            $table->boolean('Est_point_focal');
+            $table->boolean('Est_point_focal')->nullable();
             $table->string('district_localite')->nullable();
+
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('statut')->default("attente_activation");
+            $table->enum('statut',["attente_activation","actif","desactivé"])->default("attente_activation");
+            
+            //prv_expoitant 
+            //ETABLISSEMENT PHARMACEUTIQUE DE FABRICATION ET DE DISTRIBUTION EN GROS
+            $table->string('activite_exploitation')->nullable();
+            $table->string('numero_agrement')->nullable();
+            $table->date('date_agrement')->nullable();
+            //agence de promotion,
+            $table->string('Nom_laboratoire_représenté_localement')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
