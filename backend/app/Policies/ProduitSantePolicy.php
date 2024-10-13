@@ -27,9 +27,10 @@ class ProduitSantePolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): void
+    public function create(User $user): void 
     {
-        //
+        // 
+        
     }
 
     /**
@@ -38,6 +39,7 @@ class ProduitSantePolicy
     public function update(User $user, Produit_sante $produitSante): void
     {
         //
+        
     }
 
     /**

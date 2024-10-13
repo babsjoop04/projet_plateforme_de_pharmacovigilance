@@ -22,7 +22,7 @@ class NotificationController extends Controller
     public function index(Request $request)
     {
         //
-        Gate::authorize("viewAny", $request->user());
+        // Gate::authorize("viewAny", $request->user());
         return Notification::all();
     }
 
@@ -32,7 +32,7 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
 
-        Gate::authorize("create", $request->user());
+        // Gate::authorize("create", [$request->user()]);
 
         if ($request->type_notification==="notification_pqif") {
 
@@ -163,6 +163,7 @@ class NotificationController extends Controller
     public function show(Notification $notification)
     {
         //
+        // Gate::authorize("view", $notification);
         return $notification;
     }
 
@@ -173,7 +174,7 @@ class NotificationController extends Controller
     {
 
         //
-        Gate::authorize("update", $notification);
+        // Gate::authorize("update", $notification);
 
         
         if (in_array($request->type_notification,["notification_mapi","notification_eeim"])) {
@@ -257,7 +258,7 @@ class NotificationController extends Controller
     public function destroy(Notification $notification)
     {
         //
-        Gate::authorize("delete", $notification);
+        // Gate::authorize("delete", $notification);
 
         $notification->delete();
         return [

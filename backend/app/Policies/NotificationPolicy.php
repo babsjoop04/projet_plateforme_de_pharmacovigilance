@@ -19,17 +19,21 @@ class NotificationPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Notification $notification): void
+    public function view(User $user, Notification $notification): bool
     {
         //
+        return $user->id===$notification->user_id;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user): Response
     {
-        return in_array($user->role_utilisateur, ["consommateur","professionnel_sante","PRV_exploitant"]);
+        return in_array($user->role_utilisateur, ["consommateur","professionnel_sante","PRV_exploitant"])?
+        Response::allow() 
+        : 
+        Response::deny("vous n'etes pas proprietaire de cette notification");
     }
 
     /**
@@ -39,7 +43,7 @@ class NotificationPolicy
     {
         //
         //
-        return $user->id===$notification->user_id
+        return $user->id === $notification->user_id
         ?
         Response::allow() 
         : 
@@ -63,16 +67,10 @@ class NotificationPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Notification $notification): void
-    {
-        //
-    }
+   
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Notification $notification): bool
-    {
-        return false;
-    }
+   
 }
