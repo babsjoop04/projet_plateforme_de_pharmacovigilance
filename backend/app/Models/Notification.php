@@ -63,5 +63,8 @@ class Notification extends Model
      public function aggregation(){
       return $this->hasMany(Aggregation_notification_produit_sante::class);
    }
+   public function traitement(){
+      return $this->hasOne(Traitement::class);
+   }
 
 }

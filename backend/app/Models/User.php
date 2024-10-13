@@ -80,4 +80,8 @@ class User extends Authenticatable
      public function exploitation(){
         return $this->hasMany(Exploitation::class);
      }
+
+     public function traitement(){
+        return $this->hasMany(Traitement::class);
+     }
 }
