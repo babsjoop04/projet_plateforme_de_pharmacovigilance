@@ -19,6 +19,7 @@ Route::post("/logout", [AuthController::class,"logout"])->middleware('auth:sanct
 Route::middleware( 'auth:sanctum')->group(function () {
 
     Route::apiResource("notification",NotificationController::class);
+    Route::post("/gestion_utilisateur", [AuthController::class,"gerer_utilisateur"]);
     Route::apiResource("exploitation",ExploitationController::class);
     Route::apiResource("traitement",TraitementController::class);
 

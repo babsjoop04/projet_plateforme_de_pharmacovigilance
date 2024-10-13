@@ -73,7 +73,7 @@ class TraitementController extends Controller
             "necessite_imputabilite"=> 'required',
             "resultat_imputabilite"=> 'nullable',
             "statut_traitement"=> 'required',
-            "decision"=> 'required'
+            "decision"=> 'nullable'
 
         ]);
 

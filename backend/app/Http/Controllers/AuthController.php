@@ -135,4 +135,52 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
         return "Vous etes deconnecté";
     }
+
+    public function gerer_utilisateur(Request $request){
+
+        // $request->validate([
+        //     "decision"=> "require|in:demande_acceptée,demande_refusée",
+        //     "email_utilisateur"=>"require|email"
+        // ]);
+
+
+        $user=User::where("email",$request->email_utilisateur)->first();
+
+        if($request->decision=== "demande_inscription_refusée"){
+
+            $user->delete();
+
+            return [
+                "message"=> "demande refusée  et supprimée avec succes"
+            ];
+
+
+        }
+
+        if (in_array($request->decision,["réactivation_compte","demande__inscription_acceptée"])) {
+           
+            $user["statut"]="actif";
+    
+             $user->update([$user]) ;
+    
+             return $user;
+        }
+
+        if($request->decision==="desactivation_compte"){
+
+            $user["statut"]="desactivé";
+    
+             $user->update([$user]) ;
+    
+             return $user;
+        }
+
+       
+
+
+            
+        
+
+
+    }
 }
