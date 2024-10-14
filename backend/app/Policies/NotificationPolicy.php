@@ -6,6 +6,7 @@ use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
+
 class NotificationPolicy
 {
     /**
@@ -22,32 +23,37 @@ class NotificationPolicy
     public function view(User $user, Notification $notification): bool
     {
         //
-        return $user->id===$notification->user_id;
+        return $user->id===$notification->user_id || in_array($user->role_utilisateur, ["administrateur","responsable_organisme_reglementation"]);
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): Response
+    public function create_eeim_pqif(User $user)
     {
-        return in_array($user->role_utilisateur, ["consommateur","professionnel_sante","PRV_exploitant"])?
-        Response::allow() 
-        : 
-        Response::deny("vous n'etes pas proprietaire de cette notification");
+        return in_array($user->role_utilisateur, ["professionnel_sante","PRV_exploitant","consommateur"]);
+
     }
+
+    public function create_mapi(User $user)
+    {
+        return in_array($user->role_utilisateur, ["professionnel_sante","PRV_exploitant"]);
+    
+    }
+
+
+
+
+
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Notification $notification): Response
+    public function update(User $user, Notification $notification)
     {
         //
         //
-        return $user->id === $notification->user_id
-        ?
-        Response::allow() 
-        : 
-        Response::deny("vous n'etes pas proprietaire de cette notification");
+        return $user->id === $notification->user_id;
     }
 
     /**
@@ -57,11 +63,7 @@ class NotificationPolicy
     {
         //
         return false;
-        // return $user->id===$notification->user_id
-        // ?
-        // Response::allow() 
-        // : 
-        // Response::deny("vous n'etes pas proprietaire de cette notification");
+        
     }
 
     /**

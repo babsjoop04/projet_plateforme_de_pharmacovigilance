@@ -22,7 +22,7 @@ class NotificationController extends Controller
     public function index(Request $request)
     {
         //
-        // Gate::authorize("viewAny", $request->user());
+        Gate::authorize("view_any_notification", $request->user());
         return Notification::all();
     }
 
@@ -32,7 +32,31 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
 
-        // Gate::authorize("create", [$request->user()]);
+    //  return  $request;
+    // return $request->type_notification==="notification_eeim" && in_array($request->user()->role_utilisateur, ["professionnel_sante","PRV_exploitant","consommateur"]);
+
+    switch ($request->type_notification) {
+        case "notification_eeim":
+        case "notification_pqif":
+        
+            Gate::authorize('create_eeim_pqif_notification', $request->user());
+            break;
+
+        // case "notification_pqif":
+
+        //     Gate::authorize('create_eeim_pqif_notification', $request->user());
+
+        //     break;
+
+        case "notification_mapi":
+
+            Gate::authorize('create_mapi', $request->user());
+
+            break;
+    }
+    
+
+
 
         if ($request->type_notification==="notification_pqif") {
 
@@ -163,7 +187,7 @@ class NotificationController extends Controller
     public function show(Notification $notification)
     {
         //
-        // Gate::authorize("view", $notification);
+        Gate::authorize("view_notification", $notification);
         return $notification;
     }
 
@@ -174,7 +198,7 @@ class NotificationController extends Controller
     {
 
         //
-        // Gate::authorize("update", $notification);
+        Gate::authorize("update_notification", $notification);
 
         
         if (in_array($request->type_notification,["notification_mapi","notification_eeim"])) {
@@ -258,7 +282,7 @@ class NotificationController extends Controller
     public function destroy(Notification $notification)
     {
         //
-        // Gate::authorize("delete", $notification);
+        Gate::authorize("delete_notification");
 
         $notification->delete();
         return [

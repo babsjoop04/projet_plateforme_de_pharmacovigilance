@@ -2,28 +2,26 @@
 
 namespace App\Policies;
 
-use App\Models\Traitement;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class TraitementPolicy
+class UserPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user)
+    public function is_admin(User $user)
     {
         //
-        return  $user->role_utilisateur==="responsable_organisme_reglementation";
+        return $user->role_utilisateur==="administrateur";
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Traitement $traitement)
+    public function view(User $user, User $model)
     {
         //
-        return $user->id === $traitement->user_id;
     }
 
     /**
@@ -32,26 +30,37 @@ class TraitementPolicy
     public function create(User $user)
     {
         //
-        return $user->role_utilisateur==="responsable_organisme_reglementation";
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Traitement $traitement)
+    public function update(User $user, User $model)
     {
         //
-        return $user->id === $traitement->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Traitement $traitement)
+    public function delete(User $user, User $model)
     {
         //
-        return false;
     }
 
-    
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, User $model)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, User $model)
+    {
+        //
+    }
 }

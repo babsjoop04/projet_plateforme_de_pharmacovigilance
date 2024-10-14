@@ -6,6 +6,7 @@ use App\Models\Traitement;
 use App\Http\Requests\StoreTraitementRequest;
 use App\Http\Requests\UpdateTraitementRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TraitementController extends Controller
 {
@@ -14,7 +15,8 @@ class TraitementController extends Controller
      */
     public function index()
     {
-        //
+        // Gate::authorize("view_any_notification", $request->user());
+        
         return Traitement::all();
     }
 
@@ -23,7 +25,7 @@ class TraitementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Gate::authorize("create_traitement", $request->user());
         $traitement=Traitement::where('notification_id',$request->notification_id)->first();
         if($traitement){
             return [
@@ -57,7 +59,7 @@ class TraitementController extends Controller
      */
     public function show(Traitement $traitement)
     {
-        //
+        // Gate::authorize("view_any_notification", $request->user());
         return $traitement;
     }
 
@@ -66,7 +68,7 @@ class TraitementController extends Controller
      */
     public function update(Request $request, Traitement $traitement)
     {
-        //
+        // Gate::authorize("view_any_notification", $request->user());
         $fields=$request->validate([
             // "user_id"=> 'required',
             "notification_id"=> 'required|unique',
@@ -87,7 +89,7 @@ class TraitementController extends Controller
      */
     public function destroy(Traitement $traitement)
     {
-        //
+        Gate::authorize("delete_traitement");
         $traitement->delete();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class AuthController extends Controller
 {
@@ -142,6 +143,8 @@ class AuthController extends Controller
         //     "decision"=> "require|in:demande_acceptée,demande_refusée",
         //     "email_utilisateur"=>"require|email"
         // ]);
+
+        Gate::authorize("gestion_utilisateur", $request->user());
 
 
         $user=User::where("email",$request->email_utilisateur)->first();
