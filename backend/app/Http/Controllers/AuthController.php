@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 
+use Illuminate\Support\Facades\DB;
+
 class AuthController extends Controller
 {
     //
@@ -104,9 +106,20 @@ class AuthController extends Controller
             ]);
 
         $user=User::where('email',$request->email)->first();
-        if(!$user || !Hash::check( $request->password,$user->password) ){  
+        if(!$user){  
             return [
-                'message' => "Les identifiants de connexion ne sont pas corrects. Nous vous invitons à réessayer"
+                'error' =>[
+                    "email" =>"Ce compte n'existe pas. Nous vous invitons à creer un compte"
+                ] 
+            ];
+            
+        }
+
+        if( !Hash::check( $request->password,$user->password) ){  
+            return [
+                'error' =>[
+                    "password" =>"Les identifiants de connexion ne sont pas corrects. Nous vous invitons à réessayer"
+                ] 
             ];
             
         }
@@ -122,6 +135,16 @@ class AuthController extends Controller
         //         'message' => "Votre compte a été desactivé. Nous vous invitons à contacter à l'adminisrtrateur pour plus d'information"
         //     ];
         // }
+
+        // $token = $user->tokens()->where('personal_access_tokens.name', $user->email)->first();
+        
+        
+        // if($token){
+        //     return [
+        //         "message"=>"vous etes deja connecté"
+        //     ];
+        // }
+       
 
         $token= $user->createToken($user->email)->plainTextToken;
 
