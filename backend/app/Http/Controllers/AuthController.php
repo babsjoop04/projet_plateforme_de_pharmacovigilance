@@ -109,13 +109,13 @@ class AuthController extends Controller
         if(!$user){  
             return [
                 'error' =>[
-                    "email" =>"Ce compte n'existe pas. Nous vous invitons à creer un compte"
+                    "email" =>"Aucun compte n'est enregistré avec cet email."
                 ] 
             ];
             
         }
 
-        if( !Hash::check( $request->password,$user->password) ){  
+        if(!Hash::check( $request->password,$user->password) ){  
             return [
                 'error' =>[
                     "password" =>"Les identifiants de connexion ne sont pas corrects. Nous vous invitons à réessayer"
