@@ -77,8 +77,8 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
      }
 
-     public function exploitation(){
-        return $this->hasMany(Exploitation::class);
+     public function exploitant(){
+        return $this->hasMany(Exploitant::class);
      }
 
      public function traitement(){

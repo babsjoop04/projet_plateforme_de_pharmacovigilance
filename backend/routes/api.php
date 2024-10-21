@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExploitantController;
 use App\Http\Controllers\ExploitationController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TraitementController;
@@ -22,6 +23,8 @@ Route::middleware( 'auth:sanctum')->group(function () {
     Route::post("/gestion_utilisateur", [AuthController::class,"gerer_utilisateur"]);
     Route::apiResource("exploitation",ExploitationController::class);
     Route::apiResource("traitement",TraitementController::class);
+    Route::apiResource("exploitant",ExploitantController::class);
+
 
 
 });

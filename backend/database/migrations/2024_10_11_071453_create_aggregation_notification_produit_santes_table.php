@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('nom_solvant')->nullable();
             $table->date('date_peremption_solvant')->nullable();
             $table->string('numero_lot_solvant')->nullable();
-//donnee commune
+            //donnee commune
             $table->string('numero_lot');
             $table->string('provenance');
             $table->date('date_peremption');
