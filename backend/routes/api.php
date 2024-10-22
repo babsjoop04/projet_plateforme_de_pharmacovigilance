@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\ExploitantController;
 use App\Http\Controllers\ExploitationController;
 use App\Http\Controllers\NotificationController;
@@ -24,6 +25,9 @@ Route::middleware( 'auth:sanctum')->group(function () {
     Route::apiResource("exploitation",ExploitationController::class);
     Route::apiResource("traitement",TraitementController::class);
     Route::apiResource("exploitant",ExploitantController::class);
+    Route::apiResource("traitement",TraitementController::class);
+    Route::apiResource("decision",DecisionController::class);
+
 
 
 

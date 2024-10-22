@@ -33,19 +33,22 @@ class User extends Authenticatable
         'structure_travail',
         'adresse_structure_travail',
         'role_utilisateur' ,
-        'specilité'  ,  
+        'specilité'  , 
         'Est_point_focal' ,
         'district_localite',
+        'statut'  ,  
         'email' ,
         'password' ,
         'password_confirmation' ,
+        // 'files',
+        // 'lien_fichiers',
     //prv_exploitant
        
-        "activite_exploitation" ,
-        "numero_agrement" ,
-        "date_agrement" ,
-        //agence promotion
-        "Nom_laboratoire_représenté_localement" ,
+        // "activite_exploitation" ,
+        // "numero_agrement" ,
+        // "date_agrement" ,
+        // //agence promotion
+        // "Nom_laboratoire_représenté_localement" ,
    
     ];
     

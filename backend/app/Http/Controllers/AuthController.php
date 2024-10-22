@@ -14,87 +14,132 @@ class AuthController extends Controller
     //
     public function register(Request $request){
 
-        if (in_array($request->role_utilisateur,["consommateur","responsable_organisme_reglementation"])) {
+        $fields=[];
 
-        //    return "hello cons";
-           $fields=$request->validate([
-           'nom' => 'required|max:255' ,
-           'prenom'=> 'required|max:255',
-           'sexe' => 'required|max:255',
-           'adresse' => 'required|max:255',
-           'telephone' => 'required|max:255',
-           'dateNaissance' => 'required|date',
-           'profession' => 'required|max:255',
-           'structure_travail'=> 'nullable|max:255',
-           'adresse_structure_travail'=> 'nullable|max:255',
-           'role_utilisateur' => 'required',
-           'email'=> 'required|email|unique:users' ,
-           'password'=> 'required|confirmed' 
-           ]);
-   
-           $user=User::create($fields);
-   
-           return $user;
-        }
+        $request->validate([
+            "role_utilisateur"=>'required|in:consommateur,administrateur,professionnel_sante,responsable_organisme_reglementation,PRV_exploitant'
+        ]);
+
+        switch ($request->role_utilisateur) {
+            case "administrateur":
+            
+            case "consommateur":
+
+                $fields=$request->validate([
+                    'nom' => 'required|max:255' ,
+                    'prenom'=> 'required|max:255',
+                    'sexe' => 'required|max:255',
+                    'adresse' => 'required|max:255',
+                    'telephone' => 'required|max:255',
+                    'dateNaissance' => 'required|date',
+                    'profession' => 'required|max:255',
+                 //    'structure_travail'=> 'nullable|max:255',
+                 //    'adresse_structure_travail'=> 'nullable|max:255',
+                    'role_utilisateur' => 'required',
+                    'email'=> 'required|email|unique:users' ,
+                    'password'=> 'required|confirmed' 
+                    ]);
+         
+                $fields["statut"]="activé";
+            
+                break;
+    
+            case "responsable_organisme_reglementation":
+
+                $fields=$request->validate([
+                    'nom' => 'required|max:255' ,
+                    'prenom'=> 'required|max:255',
+                    'sexe' => 'required|max:255',
+                    'adresse' => 'required|max:255',
+                    'telephone' => 'required|max:255',
+                    'dateNaissance' => 'required|date',
+                    'profession' => 'required|max:255',
+                    'structure_travail'=> 'required|max:255',
+                    'adresse_structure_travail'=> 'required|max:255',
+                    'role_utilisateur' => 'required',
+                    'email'=> 'required|email|unique:users' ,
+                    'password'=> 'required|confirmed',
+                    // 'files' => 'required|file|mimes:zip', 
+                    ]);
 
 
-        if ($request->role_utilisateur==="PRV_exploitant") {
+                    // $file = $request->file('files');
+                    // $lien_fichiers = time() . '_' . $file->getClientOriginalName();
+                    // $file->storeAs('uploads', $lien_fichiers);
+         
+                $fields["statut"]="attente_traitement";
 
-            $fields_prv=$request->validate([
-           'nom' => 'required|max:255' ,
-           'prenom'=> 'required|max:255',
-           'sexe' => 'required|max:255',
-           'adresse' => 'required|max:255',
-           'telephone' => 'required|max:255',
-           'dateNaissance' => 'required|date',
-           'profession' => 'required|max:255',
-           'structure_travail'=> 'nullable|max:255',
-           'adresse_structure_travail'=> 'nullable|max:255',
-           'role_utilisateur' => 'required',
-           'specilité' => 'nullable|max:255' ,  
-           'email'=> 'required|email|unique:users' ,
-           'password'=> 'required|confirmed' ,
-           //prv_exploitant
-           "activite_exploitation"=> 'required' ,
-           "numero_agrement"=> 'required' ,
-           "date_agrement" => 'required',
-           //agence promotion
-           "Nom_laboratoire_représenté_localement" => 'nullable',
-           ]);
+                // $fields["lien_fichiers"]=$lien_fichiers;
 
-           
-           $user=User::create($fields_prv);
-   
-           return $user;
-           }
-        
+    
+    
+                break;
+    
+            case "PRV_exploitant":
 
-        if( $request->role_utilisateur=== 'professionnel_sante') {
-            $fields_pro=$request->validate([
-                'nom' => 'required|max:255' ,
-                'prenom'=> 'required|max:255',
-                'sexe' => 'required|max:255',
-                'adresse' => 'required|max:255',
-                'telephone' => 'required|max:255',
-                'dateNaissance' => 'required|date',
-                'profession' => 'required|max:255',
-                'structure_travail'=> 'nullable|max:255',
-                'adresse_structure_travail'=> 'nullable|max:255',
-                'role_utilisateur' => 'required',
-                'specilité' => 'nullable|max:255' ,  
-                'Est_point_focal' => 'required|boolean',
-                'district_localite'=> 'nullable|max:255',
-                'email'=> 'required|email|unique:users' ,
-                'password'=> 'required|confirmed' ,
+                $fields=$request->validate([
+                    'nom' => 'required|max:255' ,
+                    'prenom'=> 'required|max:255',
+                    'sexe' => 'required|max:255',
+                    'adresse' => 'required|max:255',
+                    'telephone' => 'required|max:255',
+                    'dateNaissance' => 'required|date',
+                    'profession' => 'required|max:255',
+                 //    'structure_travail'=> 'nullable|max:255',
+                 //    'adresse_structure_travail'=> 'nullable|max:255',
+                    'role_utilisateur' => 'required',
+                    'specilité' => 'nullable|max:255' ,  
+                    'email'=> 'required|email|unique:users' ,
+                    'password'=> 'required|confirmed' ,
+                     // 'files' => 'required|file|mimes:zip',
+                    //prv_exploitant
+                 //    "activite_exploitation"=> 'required' ,
+                 //    "numero_agrement"=> 'required' ,
+                 //    "date_agrement" => 'required',
+                    //agence promotion
+                 //    "Nom_laboratoire_représenté_localement" => 'nullable',
+                    ]);
+         
+                $fields["statut"]="attente_traitement";
+
+                // $fields["statut"]="attente_traitement";
+
+    
                 
-                ]);
-        
-                $user=User::create($fields_pro);
-        
-                return $user;
+    
+                break;
+
+            case "professionnel_sante":
+
+                $fields=$request->validate([
+                    'nom' => 'required|max:255' ,
+                    'prenom'=> 'required|max:255',
+                    'sexe' => 'required|max:255',
+                    'adresse' => 'required|max:255',
+                    'telephone' => 'required|max:255',
+                    'dateNaissance' => 'required|date',
+                    'profession' => 'required|max:255',
+                    'structure_travail'=> 'nullable|max:255',
+                    'adresse_structure_travail'=> 'nullable|max:255',
+                    'role_utilisateur' => 'required',
+                    'specilité' => 'nullable|max:255' ,  
+                    'Est_point_focal' => 'required|boolean',
+                    'district_localite'=> 'nullable|max:255',
+                    'email'=> 'required|email|unique:users' ,
+                    'password'=> 'required|confirmed' ,
+                     // 'files' => 'required|file|mimes:zip',
+                    
+                    ]);
+    
+                $fields["statut"]="attente_traitement";
+    
+                break;
         }
 
 
+        $user=User::create($fields);
+        
+        return $user;
 
 
 }
@@ -136,14 +181,6 @@ class AuthController extends Controller
         //     ];
         // }
 
-        // $token = $user->tokens()->where('personal_access_tokens.name', $user->email)->first();
-        
-        
-        // if($token){
-        //     return [
-        //         "message"=>"vous etes deja connecté"
-        //     ];
-        // }
        
 
         $token= $user->createToken($user->email)->plainTextToken;
@@ -172,24 +209,38 @@ class AuthController extends Controller
 
         $user=User::where("email",$request->email_utilisateur)->first();
 
+        if(!$user){
+            return [ 
+                "error"=> [
+                    "email"=> "Email invalide"
+                    ]
+                ];
+        }
+
         if($request->decision=== "demande_inscription_refusée"){
 
-            $user->delete();
+            $user["statut"]="demande_refusée";
+    
+            $user->update([$user]) ;
 
             return [
-                "message"=> "demande refusée  et supprimée avec succes"
+                "message"=> "Demande refusée avec succes"
             ];
 
 
         }
 
-        if (in_array($request->decision,["réactivation_compte","demande__inscription_acceptée"])) {
+        if (in_array($request->decision,["reactivation_compte","demande_inscription_acceptée"])) {
            
-            $user["statut"]="actif";
+            $user["statut"]="activé";
     
              $user->update([$user]) ;
+
+            return [
+                "message"=> "Compte activé avec succes"
+            ];
     
-             return $user;
+            //  return $user;
         }
 
         if($request->decision==="desactivation_compte"){
@@ -197,8 +248,12 @@ class AuthController extends Controller
             $user["statut"]="desactivé";
     
              $user->update([$user]) ;
+
+             return [
+                "message"=> "Compte desactivé avec succes"
+            ];
     
-             return $user;
+            //  return $user;
         }
 
        

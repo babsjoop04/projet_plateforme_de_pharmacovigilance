@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('traitements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('notification_id')->unique()->constrained();
-            // $table->unsignedBigInteger('notification_id')->unique();
- 
-            // $table->foreign('notification_id')->references('id')->on('notification');
+
             $table->foreignId('user_id')->constrained();
             $table->boolean('necessite_imputabilite');
-            $table->text('resultat_imputabilite')->nullable();
+
+            // $table->text('resultat_imputabilite')->nullable();
             $table->string('statut_traitement');
-            $table->string('decision')->nullable();
+            // $table->string('decision')->nullable();
             $table->timestamps();
         });
     }

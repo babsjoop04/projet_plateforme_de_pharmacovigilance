@@ -33,15 +33,15 @@ return new class extends Migration
 
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('statut',["attente_activation","actif","desactivé"])->default("attente_activation");
-            
+            $table->enum('statut',["attente_traitement","demande_refusée","activé","desactivé"]);
+            // ->default("attente_activation")
             //prv_expoitant 
             //ETABLISSEMENT PHARMACEUTIQUE DE FABRICATION ET DE DISTRIBUTION EN GROS
-            // $table->string('activite_exploitation')->nullable();
+            //! $table->string('lien_fichiers')->nullable();
             // $table->string('numero_agrement')->nullable();
             // $table->date('date_agrement')->nullable();
             //agence de promotion,
-            $table->string('Nom_laboratoire_représenté_localement')->nullable();
+            // $table->string('Nom_laboratoire_représenté_localement')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

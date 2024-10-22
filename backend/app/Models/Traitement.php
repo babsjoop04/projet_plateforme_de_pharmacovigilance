@@ -12,9 +12,9 @@ class Traitement extends Model
         "user_id",
         "notification_id",
         "necessite_imputabilite",
-        "resultat_imputabilite",
+        // "resultat_imputabilite",
         "statut_traitement",
-        "decision"
+        // "decision"
     ] ;
 
     public function user(){
@@ -22,5 +22,12 @@ class Traitement extends Model
      }
      public function notification(){
         return $this->hasOne(User::class);
+     }
+
+     public function imputabilite(){
+        return $this->hasOne(Imputabilite::class);
+     }
+     public function decision(){
+        return $this->hasOne(Decision::class);
      }
 }

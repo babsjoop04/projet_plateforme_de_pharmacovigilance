@@ -39,9 +39,9 @@ class TraitementController extends Controller
             // "user_id"=> 'required',
             "notification_id"=> 'required',
             "necessite_imputabilite"=> 'required',
-            "resultat_imputabilite"=> 'nullable',
+            // "resultat_imputabilite"=> 'nullable',
             "statut_traitement"=> 'required',
-            "decision"=> 'nullable'
+            // "decision"=> 'nullable'
 
         ]);
 
@@ -73,9 +73,9 @@ class TraitementController extends Controller
             // "user_id"=> 'required',
             "notification_id"=> 'required|unique',
             "necessite_imputabilite"=> 'required',
-            "resultat_imputabilite"=> 'nullable',
+            // "resultat_imputabilite"=> 'nullable',
             "statut_traitement"=> 'required',
-            "decision"=> 'nullable'
+            // "decision"=> 'nullable'
 
         ]);
 
