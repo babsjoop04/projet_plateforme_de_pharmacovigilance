@@ -87,4 +87,8 @@ class User extends Authenticatable
      public function traitement(){
         return $this->hasMany(Traitement::class);
      }
+
+     public function fichiersdemande(){
+        return $this->hasOne(FichiersDemandes::class);
+     }
 }

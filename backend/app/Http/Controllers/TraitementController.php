@@ -89,7 +89,7 @@ class TraitementController extends Controller
      */
     public function destroy(Traitement $traitement)
     {
-        Gate::authorize("delete_traitement");
+        // Gate::authorize("delete_traitement");
         $traitement->delete();
     }
 }

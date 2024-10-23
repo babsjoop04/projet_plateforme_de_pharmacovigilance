@@ -32,7 +32,7 @@ class ImputabiliteController extends Controller
         $traitement->imputabilite()->create($fields);
 
         return [
-            'message'=> 'Traitement créé avec success',
+            'message'=> 'Imputabilite créé avec success',
         ];
 
 

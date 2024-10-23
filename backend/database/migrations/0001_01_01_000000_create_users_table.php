@@ -37,7 +37,7 @@ return new class extends Migration
             // ->default("attente_activation")
             //prv_expoitant 
             //ETABLISSEMENT PHARMACEUTIQUE DE FABRICATION ET DE DISTRIBUTION EN GROS
-            //! $table->string('lien_fichiers')->nullable();
+            //  $table->string('lien_fichiers')->nullable();
             // $table->string('numero_agrement')->nullable();
             // $table->date('date_agrement')->nullable();
             //agence de promotion,

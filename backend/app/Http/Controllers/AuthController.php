@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -33,14 +37,16 @@ class AuthController extends Controller
                     'telephone' => 'required|max:255',
                     'dateNaissance' => 'required|date',
                     'profession' => 'required|max:255',
-                 //    'structure_travail'=> 'nullable|max:255',
-                 //    'adresse_structure_travail'=> 'nullable|max:255',
                     'role_utilisateur' => 'required',
                     'email'=> 'required|email|unique:users' ,
                     'password'=> 'required|confirmed' 
                     ]);
          
                 $fields["statut"]="activé";
+
+                // $user=User::create($fields);
+        
+                // return $user;
             
                 break;
     
@@ -59,18 +65,14 @@ class AuthController extends Controller
                     'role_utilisateur' => 'required',
                     'email'=> 'required|email|unique:users' ,
                     'password'=> 'required|confirmed',
-                    // 'files' => 'required|file|mimes:zip', 
+                    'files' => 'required|file|mimes:zip', 
                     ]);
 
+                    
 
-                    // $file = $request->file('files');
-                    // $lien_fichiers = time() . '_' . $file->getClientOriginalName();
-                    // $file->storeAs('uploads', $lien_fichiers);
+                    
          
                 $fields["statut"]="attente_traitement";
-
-                // $fields["lien_fichiers"]=$lien_fichiers;
-
     
     
                 break;
@@ -92,17 +94,10 @@ class AuthController extends Controller
                     'email'=> 'required|email|unique:users' ,
                     'password'=> 'required|confirmed' ,
                      // 'files' => 'required|file|mimes:zip',
-                    //prv_exploitant
-                 //    "activite_exploitation"=> 'required' ,
-                 //    "numero_agrement"=> 'required' ,
-                 //    "date_agrement" => 'required',
-                    //agence promotion
-                 //    "Nom_laboratoire_représenté_localement" => 'nullable',
+                    
                     ]);
          
                 $fields["statut"]="attente_traitement";
-
-                // $fields["statut"]="attente_traitement";
 
     
                 
@@ -127,17 +122,30 @@ class AuthController extends Controller
                     'district_localite'=> 'nullable|max:255',
                     'email'=> 'required|email|unique:users' ,
                     'password'=> 'required|confirmed' ,
-                     // 'files' => 'required|file|mimes:zip',
+                    //  'files' => 'required|file|mimes:zip',
                     
                     ]);
     
                 $fields["statut"]="attente_traitement";
+
+
     
                 break;
         }
 
 
         $user=User::create($fields);
+
+        $file = $request->file('files');
+        if($file){
+
+            $fileName = date("Y_m_d_h_i_s") . '_' .$fields["nom"]. '_' .$fields["prenom"] . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('uploads', $fileName,"public");
+            $fichier= $user->fichiersdemande()->create(["nom_fichiers"=>$fileName]);
+    
+            return $fileName;
+
+        }
         
         return $user;
 
@@ -255,13 +263,6 @@ class AuthController extends Controller
     
             //  return $user;
         }
-
-       
-
-
-            
-        
-
 
     }
 }

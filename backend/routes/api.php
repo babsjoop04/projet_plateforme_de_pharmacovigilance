@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\ExploitantController;
 use App\Http\Controllers\ExploitationController;
+use App\Http\Controllers\FichiersDemandesController;
+use App\Http\Controllers\ImputabiliteController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TraitementController;
 use Illuminate\Http\Request;
@@ -20,15 +22,18 @@ Route::post("/logout", [AuthController::class,"logout"])->middleware('auth:sanct
 
 Route::middleware( 'auth:sanctum')->group(function () {
 
-    Route::apiResource("notification",NotificationController::class);
     Route::post("/gestion_utilisateur", [AuthController::class,"gerer_utilisateur"]);
+    Route::apiResource("notification",NotificationController::class);
     Route::apiResource("exploitation",ExploitationController::class);
-    Route::apiResource("traitement",TraitementController::class);
     Route::apiResource("exploitant",ExploitantController::class);
     Route::apiResource("traitement",TraitementController::class);
+    Route::apiResource("imputabilite",ImputabiliteController::class);
     Route::apiResource("decision",DecisionController::class);
 
 
 
-
 });
+
+Route::get("/download", [FichiersDemandesController::class,"download"]);
+Route::get("/fichiers_demandes", [FichiersDemandesController::class,"index"]);
+

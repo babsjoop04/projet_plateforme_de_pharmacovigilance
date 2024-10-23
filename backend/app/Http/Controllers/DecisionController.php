@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Decision;
-use App\Http\Requests\StoreDecisionRequest;
-use App\Http\Requests\UpdateDecisionRequest;
+use Illuminate\Http\Request;
 use App\Models\Traitement;
 
 class DecisionController extends Controller
@@ -17,11 +16,14 @@ class DecisionController extends Controller
         //
         return Decision::all();
     }
+   
+
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDecisionRequest $request)
+    public function store(Request $request)
     {
         //
         $fields=$request->validate(rules: [
@@ -49,7 +51,7 @@ class DecisionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDecisionRequest $request, Decision $decision)
+    public function update(Request $request, Decision $decision)
     {
         //
         $fields=$request->validate([
