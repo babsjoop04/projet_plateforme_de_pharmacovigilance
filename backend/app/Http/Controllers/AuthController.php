@@ -16,196 +16,201 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     //
-    public function register(Request $request){
+    public function register(Request $request)
+    {
 
-        $fields=[];
+        $fields = [];
 
         $request->validate([
-            "role_utilisateur"=>'required|in:consommateur,administrateur,professionnel_sante,responsable_organisme_reglementation,PRV_exploitant'
+            "role_utilisateur" => 'required|in:consommateur,administrateur,professionnel_sante,responsable_organisme_reglementation,PRV_exploitant'
         ]);
 
         switch ($request->role_utilisateur) {
             case "administrateur":
-            
+
             case "consommateur":
 
-                $fields=$request->validate([
-                    'nom' => 'required|max:255' ,
-                    'prenom'=> 'required|max:255',
+                $fields = $request->validate([
+                    'nom' => 'required|max:255',
+                    'prenom' => 'required|max:255',
                     'sexe' => 'required|max:255',
                     'adresse' => 'required|max:255',
                     'telephone' => 'required|max:255',
                     'dateNaissance' => 'required|date',
                     'profession' => 'required|max:255',
                     'role_utilisateur' => 'required',
-                    'email'=> 'required|email|unique:users' ,
-                    'password'=> 'required|confirmed' 
-                    ]);
-         
-                $fields["statut"]="activé";
+                    'email' => 'required|email|unique:users',
+                    'password' => 'required|confirmed'
+                ]);
+
+                $fields["statut"] = "activé";
 
                 // $user=User::create($fields);
-        
+
                 // return $user;
-            
+
                 break;
-    
+
             case "responsable_organisme_reglementation":
 
-                $fields=$request->validate([
-                    'nom' => 'required|max:255' ,
-                    'prenom'=> 'required|max:255',
+                $fields = $request->validate([
+                    'nom' => 'required|max:255',
+                    'prenom' => 'required|max:255',
                     'sexe' => 'required|max:255',
                     'adresse' => 'required|max:255',
                     'telephone' => 'required|max:255',
                     'dateNaissance' => 'required|date',
                     'profession' => 'required|max:255',
-                    'structure_travail'=> 'required|max:255',
-                    'adresse_structure_travail'=> 'required|max:255',
+                    'structure_travail' => 'required|max:255',
+                    'adresse_structure_travail' => 'required|max:255',
                     'role_utilisateur' => 'required',
-                    'email'=> 'required|email|unique:users' ,
-                    'password'=> 'required|confirmed',
-                    'files' => 'required|file|mimes:zip', 
-                    ]);
+                    'email' => 'required|email|unique:users',
+                    'password' => 'required|confirmed',
+                    'files' => 'required|file|mimes:zip',
+                ]);
 
-                    
 
-                    
-         
-                $fields["statut"]="attente_traitement";
-    
-    
+
+
+
+                $fields["statut"] = "attente_traitement";
+
+
                 break;
-    
+
             case "PRV_exploitant":
 
-                $fields=$request->validate([
-                    'nom' => 'required|max:255' ,
-                    'prenom'=> 'required|max:255',
+                $fields = $request->validate([
+                    'nom' => 'required|max:255',
+                    'prenom' => 'required|max:255',
                     'sexe' => 'required|max:255',
                     'adresse' => 'required|max:255',
                     'telephone' => 'required|max:255',
                     'dateNaissance' => 'required|date',
                     'profession' => 'required|max:255',
-                 //    'structure_travail'=> 'nullable|max:255',
-                 //    'adresse_structure_travail'=> 'nullable|max:255',
+                    //    'structure_travail'=> 'nullable|max:255',
+                    //    'adresse_structure_travail'=> 'nullable|max:255',
                     'role_utilisateur' => 'required',
-                    'specilité' => 'nullable|max:255' ,  
-                    'email'=> 'required|email|unique:users' ,
-                    'password'=> 'required|confirmed' ,
-                     // 'files' => 'required|file|mimes:zip',
-                    
-                    ]);
-         
-                $fields["statut"]="attente_traitement";
+                    'specilité' => 'nullable|max:255',
+                    'email' => 'required|email|unique:users',
+                    'password' => 'required|confirmed',
+                    // 'files' => 'required|file|mimes:zip',
 
-    
-                
-    
+                ]);
+
+                $fields["statut"] = "attente_traitement";
+
+
+
+
                 break;
 
             case "professionnel_sante":
 
-                $fields=$request->validate([
-                    'nom' => 'required|max:255' ,
-                    'prenom'=> 'required|max:255',
+                $fields = $request->validate([
+                    'nom' => 'required|max:255',
+                    'prenom' => 'required|max:255',
                     'sexe' => 'required|max:255',
                     'adresse' => 'required|max:255',
                     'telephone' => 'required|max:255',
                     'dateNaissance' => 'required|date',
                     'profession' => 'required|max:255',
-                    'structure_travail'=> 'nullable|max:255',
-                    'adresse_structure_travail'=> 'nullable|max:255',
+                    'structure_travail' => 'nullable|max:255',
+                    'adresse_structure_travail' => 'nullable|max:255',
                     'role_utilisateur' => 'required',
-                    'specilité' => 'nullable|max:255' ,  
+                    'specilité' => 'nullable|max:255',
                     'Est_point_focal' => 'required|boolean',
-                    'district_localite'=> 'nullable|max:255',
-                    'email'=> 'required|email|unique:users' ,
-                    'password'=> 'required|confirmed' ,
+                    'district_localite' => 'nullable|max:255',
+                    'email' => 'required|email|unique:users',
+                    'password' => 'required|confirmed',
                     //  'files' => 'required|file|mimes:zip',
-                    
-                    ]);
-    
-                $fields["statut"]="attente_traitement";
+
+                ]);
+
+                $fields["statut"] = "attente_traitement";
 
 
-    
+
                 break;
         }
 
 
-        $user=User::create($fields);
+        $user = User::create($fields);
 
         $file = $request->file('files');
-        if($file){
+        if ($file) {
 
-            $fileName = date("Y_m_d_h_i_s") . '_' .$fields["nom"]. '_' .$fields["prenom"] . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('uploads', $fileName,"public");
-            $fichier= $user->fichiersdemande()->create(["nom_fichiers"=>$fileName]);
-    
+            $fileName = date("Y_m_d_h_i_s") . '_' . $fields["nom"] . '_' . $fields["prenom"] . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('uploads', $fileName, "public");
+            $fichier = $user->fichiersdemande()->create(["nom_fichiers" => $fileName]);
+
             return $fileName;
-
         }
-        
+
         return $user;
-
-
-}
-    public function login(Request $request){
+    }
+    public function login(Request $request)
+    {
 
         $request->validate([
-            'email'=> 'required|email|exists:users' ,
-            'password'=> 'required' ,
-            ]);
+            'email' => 'required|email',
+            // |exists:users
+            'password' => 'required',
+        ]);
 
-        $user=User::where('email',$request->email)->first();
-        if(!$user){  
-            return [
-                'error' =>[
-                    "email" =>"Aucun compte n'est enregistré avec cet email."
-                ] 
-            ];
-            
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json([
+                'errors' => [
+                    "email" => "Aucun compte enregistré avec cet email."
+                ]
+            ], 404);
+            ;
         }
 
-        if(!Hash::check( $request->password,$user->password) ){  
-            return [
-                'error' =>[
-                    "password" =>"Les identifiants de connexion ne sont pas corrects. Nous vous invitons à réessayer"
-                ] 
-            ];
-            
+        if (!Hash::check($request->password, $user->password)) {
+            return  response()->json([
+                'errors' => [
+                    "password" => "Les identifiants de connexion ne sont pas corrects. Nous vous invitons à réessayer"
+                ]
+            ], 404);
         }
-        
-        // if ($user->statut === "attente_activation" ) {
+
+        // if ($user->statut === "attente_activation") {
         //     return [
-        //         'message' => "Votre demande d'inscription est en attente de traitement. Nous vous invitons à contacter l'administrateur."
+        //         'errors' => [
+        //             'message' => "Votre demande d'inscription est en attente de traitement. Nous vous invitons à contacter l'administrateur."
+        //         ]
         //     ];
         // }
 
-        // if ($user->statut === "desactivé" ) {
+        // if ($user->statut === "desactivé") {
         //     return [
-        //         'message' => "Votre compte a été desactivé. Nous vous invitons à contacter à l'adminisrtrateur pour plus d'information"
+        //         'errors' => [
+
+        //             'message' => "Votre compte a été desactivé. Nous vous invitons à contacter à l'adminisrtrateur pour plus d'information"
+        //         ]
         //     ];
         // }
 
-       
 
-        $token= $user->createToken($user->email)->plainTextToken;
+
+        $token = $user->createToken($user->email)->plainTextToken;
 
         return [
             "user" => $user,
-            "token"=> $token
+            "token" => $token
         ];
-
     }
-    public function logout(Request $request){
-        
+    public function logout(Request $request)
+    {
+
         $request->user()->tokens()->delete();
         return "Vous etes deconnecté";
     }
 
-    public function gerer_utilisateur(Request $request){
+    public function gerer_utilisateur(Request $request)
+    {
 
         // $request->validate([
         //     "decision"=> "require|in:demande_acceptée,demande_refusée",
@@ -215,54 +220,51 @@ class AuthController extends Controller
         Gate::authorize("gestion_utilisateur", $request->user());
 
 
-        $user=User::where("email",$request->email_utilisateur)->first();
+        $user = User::where("email", $request->email_utilisateur)->first();
 
-        if(!$user){
-            return [ 
-                "error"=> [
-                    "email"=> "Email invalide"
-                    ]
-                ];
+        if (!$user) {
+            return [
+                "error" => [
+                    "email" => "Email invalide"
+                ]
+            ];
         }
 
-        if($request->decision=== "demande_inscription_refusée"){
+        if ($request->decision === "demande_inscription_refusée") {
 
-            $user["statut"]="demande_refusée";
-    
-            $user->update([$user]) ;
+            $user["statut"] = "demande_refusée";
+
+            $user->update([$user]);
 
             return [
-                "message"=> "Demande refusée avec succes"
+                "message" => "Demande refusée avec succes"
             ];
-
-
         }
 
-        if (in_array($request->decision,["reactivation_compte","demande_inscription_acceptée"])) {
-           
-            $user["statut"]="activé";
-    
-             $user->update([$user]) ;
+        if (in_array($request->decision, ["reactivation_compte", "demande_inscription_acceptée"])) {
+
+            $user["statut"] = "activé";
+
+            $user->update([$user]);
 
             return [
-                "message"=> "Compte activé avec succes"
+                "message" => "Compte activé avec succes"
             ];
-    
+
             //  return $user;
         }
 
-        if($request->decision==="desactivation_compte"){
+        if ($request->decision === "desactivation_compte") {
 
-            $user["statut"]="desactivé";
-    
-             $user->update([$user]) ;
+            $user["statut"] = "desactivé";
 
-             return [
-                "message"=> "Compte desactivé avec succes"
+            $user->update([$user]);
+
+            return [
+                "message" => "Compte desactivé avec succes"
             ];
-    
+
             //  return $user;
         }
-
     }
 }
