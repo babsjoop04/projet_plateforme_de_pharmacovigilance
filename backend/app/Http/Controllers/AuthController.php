@@ -45,11 +45,20 @@ class AuthController extends Controller
 
                 $fields["statut"] = "activé";
 
+                $user = User::create($fields);
+
+
+
+
+                return [
+                    "message" => "Compte créé avec success",
+                ];
+
                 // $user=User::create($fields);
 
                 // return $user;
 
-                break;
+                // break;
 
             case "responsable_organisme_reglementation":
 
@@ -94,7 +103,7 @@ class AuthController extends Controller
                     'specilité' => 'nullable|max:255',
                     'email' => 'required|email|unique:users',
                     'password' => 'required|confirmed',
-                    // 'files' => 'required|file|mimes:zip',
+                    'files' => 'required|file|mimes:zip',
 
                 ]);
 
@@ -119,13 +128,17 @@ class AuthController extends Controller
                     'adresse_structure_travail' => 'nullable|max:255',
                     'role_utilisateur' => 'required',
                     'specilité' => 'nullable|max:255',
-                    'Est_point_focal' => 'required|boolean',
+                    'Est_point_focal' => 'required|boolean',//à supprimer
                     'district_localite' => 'nullable|max:255',
+                    // region à revoir
                     'email' => 'required|email|unique:users',
                     'password' => 'required|confirmed',
                     //  'files' => 'required|file|mimes:zip',
 
                 ]);
+                // return [
+                //     "message" => $fields,
+                // ];
 
                 $fields["statut"] = "attente_traitement";
 
@@ -139,15 +152,17 @@ class AuthController extends Controller
 
         $file = $request->file('files');
         if ($file) {
+           
 
             $fileName = date("Y_m_d_h_i_s") . '_' . $fields["nom"] . '_' . $fields["prenom"] . '.' . $file->getClientOriginalExtension();
             $file->storeAs('uploads', $fileName, "public");
-            $fichier = $user->fichiersdemande()->create(["nom_fichiers" => $fileName]);
+             $user->fichiersdemande()->create(["nom_fichiers" => $fileName]);
 
-            return $fileName;
         }
 
-        return $user;
+        return[
+            "message" => "Demande d'inscription faite avec success",
+        ];
     }
     public function login(Request $request)
     {
@@ -165,7 +180,6 @@ class AuthController extends Controller
                     "email" => "Aucun compte enregistré avec cet email."
                 ]
             ], 404);
-            ;
         }
 
         if (!Hash::check($request->password, $user->password)) {

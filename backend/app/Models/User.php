@@ -40,7 +40,7 @@ class User extends Authenticatable
         'email' ,
         'password' ,
         'password_confirmation' ,
-        // 'files',
+        'files',
         // 'lien_fichiers',
     //prv_exploitant
        
