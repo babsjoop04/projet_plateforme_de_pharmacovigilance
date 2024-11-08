@@ -13,34 +13,36 @@ class Aggregation_notification_produit_sante extends Model
         // "id_produit_sante", 
         //eeim
         "posologie",
-        "date_debut_prise", 
-        "date_fin_prise",       
+        "date_debut_prise",
+        "date_fin_prise",
 
         //mapi
-        "date_ouverture_flacon" ,
-         "date_vaccination" ,
-        "site_administration" ,
-        "nombre_contact_vaccin" ,
-        "nom_solvant", 
+        "date_ouverture_flacon",
+        "date_vaccination",
+        "site_administration",
+        "nombre_contact_vaccin",
+        "nom_solvant",
         "date_peremption_solvant",
         "numero_lot_solvant",
 
-        "numero_lot", 
-        "provenance" ,
-        "date_peremption", 
+        "numero_lot",
+        "provenance",
+        // "date_prise",
+        "date_peremption",
         "produits_santes",
         "produit_sante_id"
 
-        
-    ] ;
+
+    ];
 
 
-    public function notification(){
+    public function notification()
+    {
         return $this->belongsTo(Notification::class);
-     }
+    }
 
-     public function produit_sante(){
+    public function produit_sante()
+    {
         return $this->hasMany(Produit_sante::class);
-     }
- 
+    }
 }

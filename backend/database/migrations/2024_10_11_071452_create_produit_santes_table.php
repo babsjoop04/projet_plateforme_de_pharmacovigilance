@@ -14,6 +14,20 @@ return new class extends Migration
         Schema::create('produit_santes', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            // $table->string('nom_produit');
+
+            // $table->string('type_produit');
+
+            // $table->string('numero_AMM');
+            // $table->string('DCI');
+            // $table->string('dosage');
+            // $table->string('conditionnement');
+            // $table->string('forme_galénique');
+            // $table->string('laboratoire');
+            // $table->string('voie_administration');
+            // $table->string('classe_thérapeutique');
+
+
             $table->timestamps();
         });
     }

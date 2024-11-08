@@ -21,6 +21,8 @@ return new class extends Migration
             //eeim
             $table->text('posologie')->nullable();
             $table->date('date_debut_prise')->nullable();
+            // $table->date('date_prise')->nullable();
+
             $table->date('date_fin_prise')->nullable();
             //mapi
             $table->date('date_ouverture_flacon')->nullable();

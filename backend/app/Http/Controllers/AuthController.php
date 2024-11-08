@@ -231,7 +231,7 @@ class AuthController extends Controller
         //     "email_utilisateur"=>"require|email"
         // ]);
 
-        Gate::authorize("gestion_utilisateur", $request->user());
+        // Gate::authorize("gestion_utilisateur", $request->user());
 
 
         $user = User::where("email", $request->email_utilisateur)->first();
@@ -280,5 +280,42 @@ class AuthController extends Controller
 
             //  return $user;
         }
+    }
+
+    public function getDemande(Request $request)
+    {
+
+        // $request->validate([
+        //     "decision"=> "require|in:demande_acceptée,demande_refusée",
+        //     "email_utilisateur"=>"require|email"
+        // ]);
+
+        // Gate::authorize("gestion_utilisateur", $request->user());N
+
+
+        $users=User::where("statut", "attente_traitement")->get();
+        // 
+        return $users->groupBy('role_utilisateur') ;
+
+      
+    }
+
+    public function index(Request $request)
+    {
+
+        // $request->validate([
+        //     "decision"=> "require|in:demande_acceptée,demande_refusée",
+        //     "email_utilisateur"=>"require|email"
+        // ]);
+
+        // Gate::authorize("gestion_utilisateur", $request->user());N
+
+
+      
+        $users=User::whereNot("statut", "attente_traitement")->get();
+
+        return $users->groupBy('role_utilisateur');
+
+      
     }
 }
