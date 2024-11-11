@@ -37,14 +37,14 @@ return new class extends Migration
             $table->string('nom_constatateur')->nullable(); 
             $table->string('adresse_constatateur')->nullable(); 
             $table->string('tel_constatateur')->nullable(); 
-            // $table->string('email_constatateur')->nullable(); 
-            // $table->string('profession_constatateur')->nullable(); 
-            // $table->string('lieu_travail_constatateur')->nullable(); 
+            $table->string('email_constatateur')->nullable(); 
+            $table->string('profession_constatateur')->nullable(); 
+            $table->string('lieu_travail_constatateur')->nullable(); 
 
 
             $table->boolean('echantillon_conserve')->nullable();
-            // $table->string('nom_detenteur')->nullable(); 
-            // $table->string('prenom_detenteur')->nullable(); 
+            $table->string('nom_detenteur')->nullable(); 
+            $table->string('prenom_detenteur')->nullable(); 
 
             $table->string('tel_detenteur')->nullable(); 
             // $table->string('email_detenteur')->nullable(); 

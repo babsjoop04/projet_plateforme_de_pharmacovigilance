@@ -13,17 +13,15 @@ class ProduitSanteController extends Controller
     public function index()
     {
         //
+
         return Produit_sante::all();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function rechercher(Request $request)
     {
         //
+        // return Produit_sante::all();
         $fields = $request->validate([
-            // 'nom_produit' => 'required',
+            'nom_produit' => 'required',
             // 'type_produit' => 'required|in:medicament,vaccin,autre',
             // 'numero_AMM' => 'required',
             // 'DCI' => 'required',
@@ -33,6 +31,34 @@ class ProduitSanteController extends Controller
             // 'laboratoire' => 'required',
             // 'voie_administration' => 'required',
             // 'classe_thérapeutique' => 'required',
+            
+
+        ]);
+
+
+        // return $fields;
+        
+        return Produit_sante::whereLike('nom_produit', "%".$fields["nom_produit"]."%",)->get();
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+        $fields = $request->validate([
+            'nom_produit' => 'required',
+            'type_produit' => 'required|in:medicament,vaccin,autre',
+            'numero_AMM' => 'required',
+            'DCI' => 'required',
+            'dosage' => 'required',
+            'conditionnement' => 'required',
+            'forme_galénique' => 'required',
+            'laboratoire' => 'required',
+            'voie_administration' => 'required',
+            'classe_thérapeutique' => 'required',
             
 
         ]);
@@ -61,16 +87,16 @@ class ProduitSanteController extends Controller
     {
         //
         $fields = $request->validate([
-            // 'nom_produit' => 'required',
-            // 'type_produit' => 'required|in:medicament,vaccin,autre',
-            // 'numero_AMM' => 'required',
-            // 'DCI' => 'required',
-            // 'dosage' => 'required',
-            // 'conditionnement' => 'required',
-            // 'forme_galénique' => 'required',
-            // 'laboratoire' => 'required',
-            // 'voie_administration' => 'required',
-            // 'classe_thérapeutique' => 'required',
+            'nom_produit' => 'required',
+            'type_produit' => 'required|in:medicament,vaccin,autre',
+            'numero_AMM' => 'required',
+            'DCI' => 'required',
+            'dosage' => 'required',
+            'conditionnement' => 'required',
+            'forme_galénique' => 'required',
+            'laboratoire' => 'required',
+            'voie_administration' => 'required',
+            'classe_thérapeutique' => 'required',
             
 
         ]);

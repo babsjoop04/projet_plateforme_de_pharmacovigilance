@@ -23,7 +23,24 @@ class NotificationController extends Controller
     {
         //
         // Gate::authorize("view_any_notification", $request->user());
-        return Notification::all();
+        $user = $request->user();
+
+
+
+        // return $request;
+
+
+        // if ($user->role_utilisateur !== "responsable_organisme_reglementation") {
+        # code...
+        $notifications = $user->notification()->get();
+        return $notifications->groupBy('type_notification');
+        // }
+
+        // return Notification::all();
+
+        // return [
+        //     "message" => "comme se nait rien fait",
+        // ];
     }
 
     /**
@@ -93,7 +110,7 @@ class NotificationController extends Controller
 
             $notification = $request->user()->notification()->create($fields);
             // return $notification;
-             $notification->aggregation()->create($fields_aggregation);
+            $notification->aggregation()->create($fields_aggregation);
 
             return [
                 "message" => "Notification faite avec success",
@@ -120,7 +137,7 @@ class NotificationController extends Controller
                     //description evenement EEIM-MAPI
                     // 'description_evenement_EEIM_MAPI',
                     'readministration' => 'required|boolean',
-                    'reapparition_apres_readministration' => 'required|boolean',
+                    'reapparition_apres_readministration' => 'nullable|boolean',
                     'traitement_correcteur' => 'required|boolean',
                     'text_traitement_correcteur' => 'nullable',
                     'suivi_patient' => 'required|max:255',
@@ -141,32 +158,32 @@ class NotificationController extends Controller
             $fields_aggregation = $request->validate([
 
                 'infos_produits_santes' => "required|array",
-                'infos_produits_santes.*.produit_sante_id'=>"required",
-                "infos_produits_santes.*.type_produit"=> "required|in:medicament,vaccin,autre",
-                "infos_produits_santes.*.numero_lot"=>'required', 
-                "infos_produits_santes.*.provenance" =>'required',
-                "infos_produits_santes.*.date_peremption"=>'required|date', 
-                "infos_produits_santes.*.posologie"=>'exclude_if:infos_produits_santes.*.type_produit,vaccin|required' ,
+                'infos_produits_santes.*.produit_sante_id' => "required",
+                "infos_produits_santes.*.type_produit" => "required|in:medicament,vaccin,autre",
+                "infos_produits_santes.*.numero_lot" => 'required',
+                "infos_produits_santes.*.provenance" => 'required',
+                "infos_produits_santes.*.date_peremption" => 'required|date',
+                "infos_produits_santes.*.posologie" => 'exclude_if:infos_produits_santes.*.type_produit,vaccin|required',
 
                 // medicament
-                "infos_produits_santes.*.date_debut_prise"=>'exclude_unless:infos_produits_santes.*.type_produit,medicament|required|date' ,
-                "infos_produits_santes.*.date_fin_prise"=>'exclude_unless:infos_produits_santes.*.type_produit,medicament|required|date' ,
+                "infos_produits_santes.*.date_debut_prise" => 'exclude_unless:infos_produits_santes.*.type_produit,medicament|required|date',
+                "infos_produits_santes.*.date_fin_prise" => 'exclude_unless:infos_produits_santes.*.type_produit,medicament|required|date',
                 // "infos_produits_santes.*.date_fin_prise"=>'exclude_unless:infos_produits_santes.*.type_produit,medicament|nullable|date' ,
 
 
                 // autre
-                "infos_produits_santes.*.date_prise"=>'exclude_unless:infos_produits_santes.*.type_produit,autre|required|date' ,
+                "infos_produits_santes.*.date_prise" => 'exclude_unless:infos_produits_santes.*.type_produit,autre|required|date',
 
 
-                
+
                 // vaccin
-                "infos_produits_santes.*.date_ouverture_flacon"=>'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|date' ,
-                 "infos_produits_santes.*.date_vaccination" =>'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|date',
-                "infos_produits_santes.*.site_administration" =>'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|max:255',
-                "infos_produits_santes.*.nombre_contact_vaccin" =>'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|numeric' ,
-                "infos_produits_santes.*.nom_solvant"=>'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|max:255', 
-                "infos_produits_santes.*.date_peremption_solvant"=>'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|date',
-                "infos_produits_santes.*.numero_lot_solvant"=>'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|max:255',
+                "infos_produits_santes.*.date_ouverture_flacon" => 'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|date',
+                "infos_produits_santes.*.date_vaccination" => 'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|date',
+                "infos_produits_santes.*.site_administration" => 'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|max:255',
+                "infos_produits_santes.*.nombre_contact_vaccin" => 'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|numeric',
+                "infos_produits_santes.*.nom_solvant" => 'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|max:255',
+                "infos_produits_santes.*.date_peremption_solvant" => 'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|date',
+                "infos_produits_santes.*.numero_lot_solvant" => 'exclude_unless:infos_produits_santes.*.type_produit,vaccin|required|max:255',
             ]);
 
             // return $fields_aggregation;

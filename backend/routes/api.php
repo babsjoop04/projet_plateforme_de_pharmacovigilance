@@ -30,15 +30,18 @@ Route::middleware( 'auth:sanctum')->group(function () {
     Route::apiResource("traitement",TraitementController::class);
     Route::apiResource("imputabilite",ImputabiliteController::class);
     Route::apiResource("decision",DecisionController::class);
+    Route::get("/produit/rechercher", [ProduitSanteController::class,"rechercher"]);
     Route::apiResource("produit",ProduitSanteController::class);
+
 
     
     
     
+    Route::get("/utilisateurs", [AuthController::class,"index"]);
 });
+
 Route::post("/utilisateur/gestion", [AuthController::class,"gerer_utilisateur"]);
 Route::get("/utilisateur/demandes", [AuthController::class,"getDemande"]);
-Route::get("/utilisateurs", [AuthController::class,"index"]);
 
 
 Route::get("/download", [FichiersDemandesController::class,"download"]);

@@ -212,8 +212,12 @@ class AuthController extends Controller
         $token = $user->createToken($user->email)->plainTextToken;
 
         return [
-            "user" => $user,
-            "token" => $token
+            // "user" => $user,
+            "token" => $token,
+            "role_utilisateur"=>$user->role_utilisateur,
+            "prenom"=>$user->prenom,
+            "nom"=>$user->nom,
+
         ];
     }
     public function logout(Request $request)
