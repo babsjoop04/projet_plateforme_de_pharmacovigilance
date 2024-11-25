@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use App\Models\Aggregation_notification_produit_sante;
-
+use App\Models\Traitement;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -28,12 +28,29 @@ class NotificationController extends Controller
 
 
         // return $request;
+        $notifications = [];
 
+        if ($user->role_utilisateur !== "responsable_organisme_reglementation") {
+            # code...
+            $notifications = $user->notification()->get();
+        } else {
+            // return 
+            $traitements = Traitement::pluck('id')->all();
+            $notifications = Notification::whereNotIn("id", $traitements)->get();
+        }
 
-        // if ($user->role_utilisateur !== "responsable_organisme_reglementation") {
-        # code...
-        $notifications = $user->notification()->get();
-        return $notifications->groupBy('type_notification');
+        foreach ($notifications as $notification) {
+
+            $aggregations = $notification->aggregation()->get();
+            foreach ($aggregations as $aggregation) {
+                // $aggregation->infos=
+                $aggregation->produit_sante;
+            }
+
+            $notification->produits = $aggregations;
+        }
+
+        return $notifications;
         // }
 
         // return Notification::all();

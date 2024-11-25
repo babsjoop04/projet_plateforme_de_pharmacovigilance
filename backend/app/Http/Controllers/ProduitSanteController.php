@@ -31,14 +31,14 @@ class ProduitSanteController extends Controller
             // 'laboratoire' => 'required',
             // 'voie_administration' => 'required',
             // 'classe_thérapeutique' => 'required',
-            
+
 
         ]);
 
 
         // return $fields;
-        
-        return Produit_sante::whereLike('nom_produit', "%".$fields["nom_produit"]."%",)->get();
+
+        return Produit_sante::whereLike('nom_produit', "%" . $fields["nom_produit"] . "%",)->get();
     }
 
 
@@ -54,36 +54,43 @@ class ProduitSanteController extends Controller
             'numero_AMM' => 'required',
             'DCI' => 'required',
             'dosage' => 'required',
+            'date_début' => 'required|date',
+            'prix_public' => 'required',
             'conditionnement' => 'required',
             'forme_galénique' => 'required',
             'laboratoire' => 'required',
             'voie_administration' => 'required',
             'classe_thérapeutique' => 'required',
-            
+
 
         ]);
-         Produit_sante::create($fields);
 
-         return [
-            "message"=> 'Produit ajouté avec success',
 
-         ];
+        Produit_sante::create($fields);
 
+        return [
+            "message" => 'Produit ajouté avec success',
+
+        ];
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Produit_sante $produit_sante)
+    public function show(Produit_sante $produit)
     {
         //
-        return $produit_sante;
+        // $produit_sante
+        return $produit;
+        // [
+        //     "message" =>"hello"
+        // ];
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produit_sante $produit_sante)
+    public function update(Request $request, Produit_sante $produit)
     {
         //
         $fields = $request->validate([
@@ -92,34 +99,36 @@ class ProduitSanteController extends Controller
             'numero_AMM' => 'required',
             'DCI' => 'required',
             'dosage' => 'required',
+            'date_début' => 'required|date',
+            'prix_public' => 'required',
             'conditionnement' => 'required',
             'forme_galénique' => 'required',
             'laboratoire' => 'required',
             'voie_administration' => 'required',
             'classe_thérapeutique' => 'required',
-            
-
         ]);
 
-        $produit_sante->update($fields);
+        $produit->update($fields);
 
-        return [
-            "message"=> 'Produit mis à jour avec success',
+        return
+            // $produit;
+            [
+                "message" => 'Produit mis à jour avec success',
+                "produit" => $produit
 
-         ];
-
+            ];
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produit_sante $produit_sante)
+    public function destroy(Produit_sante $produit)
     {
         //
-        $produit_sante->delete();
+        $produit->delete();
         return [
-            "message"=> 'Produit supprimé avec success',
+            "message" => 'Produit supprimé avec success',
 
-         ];
+        ];
     }
 }

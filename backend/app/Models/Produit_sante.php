@@ -9,7 +9,7 @@ class Produit_sante extends Model
 {
     use HasFactory;
     protected $fillable = [
-        // 'nom',
+        'id',
         'nom_produit',
         'type_produit',
         'numero_AMM',
@@ -30,5 +30,10 @@ class Produit_sante extends Model
     public function exploitation()
     {
         return $this->hasMany(Exploitation::class);
+    }
+
+    public function aggregation()
+    {
+        return $this->hasMany(Aggregation_notification_produit_sante::class);
     }
 }

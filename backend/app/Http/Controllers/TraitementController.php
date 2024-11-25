@@ -26,13 +26,7 @@ class TraitementController extends Controller
     public function store(Request $request)
     {
         // Gate::authorize("create_traitement", $request->user());
-        $traitement=Traitement::where('notification_id',$request->notification_id)->first();
-        if($traitement){
-            return [
-                "message"=>"La notification est deja en cours de traitement"
-            ];
-
-        }
+        
 
 
         $fields=$request->validate([
@@ -44,6 +38,14 @@ class TraitementController extends Controller
             // "decision"=> 'nullable'
 
         ]);
+
+        $traitement=Traitement::where('notification_id',$fields["notification_id"])->first();
+        if($traitement){
+            return [
+                "message"=>"La notification est deja en cours de traitement"
+            ];
+
+        }
 
         $traitement=$request->user()->traitement()->create($fields);
 

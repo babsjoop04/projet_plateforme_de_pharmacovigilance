@@ -31,7 +31,11 @@ Route::middleware( 'auth:sanctum')->group(function () {
     Route::apiResource("imputabilite",ImputabiliteController::class);
     Route::apiResource("decision",DecisionController::class);
     Route::get("/produit/rechercher", [ProduitSanteController::class,"rechercher"]);
+    // Route::get("/produit/{produit}", [ProduitSanteController::class,"show"]);
+
     Route::apiResource("produit",ProduitSanteController::class);
+
+    
 
 
     

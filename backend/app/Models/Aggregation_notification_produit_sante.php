@@ -43,6 +43,6 @@ class Aggregation_notification_produit_sante extends Model
 
     public function produit_sante()
     {
-        return $this->hasMany(Produit_sante::class);
+        return $this->belongsTo(Produit_sante::class);
     }
 }
