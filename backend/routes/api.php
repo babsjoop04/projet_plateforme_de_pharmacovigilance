@@ -27,6 +27,9 @@ Route::middleware( 'auth:sanctum')->group(function () {
     Route::apiResource("notification",NotificationController::class);
     Route::apiResource("exploitation",ExploitationController::class);
     Route::apiResource("exploitant",ExploitantController::class);
+    Route::get("/traitement/termine", [TraitementController::class,"getTraitementsFinis"]);
+    Route::get("/traitement/actif", [TraitementController::class,"getTraitementsActifs"]);
+
     Route::apiResource("traitement",TraitementController::class);
     Route::apiResource("imputabilite",ImputabiliteController::class);
     Route::apiResource("decision",DecisionController::class);
@@ -36,13 +39,9 @@ Route::middleware( 'auth:sanctum')->group(function () {
     Route::apiResource("produit",ProduitSanteController::class);
 
     
-
-
-    
-    
-    
     Route::get("/utilisateurs", [AuthController::class,"index"]);
 });
+
 
 Route::post("/utilisateur/gestion", [AuthController::class,"gerer_utilisateur"]);
 Route::get("/utilisateur/demandes", [AuthController::class,"getDemande"]);

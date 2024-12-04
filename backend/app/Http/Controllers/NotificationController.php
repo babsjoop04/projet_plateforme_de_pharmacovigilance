@@ -35,7 +35,7 @@ class NotificationController extends Controller
             $notifications = $user->notification()->get();
         } else {
             // return 
-            $traitements = Traitement::pluck('id')->all();
+            $traitements = Traitement::pluck('notification_id')->all();
             $notifications = Notification::whereNotIn("id", $traitements)->get();
         }
 
@@ -225,6 +225,15 @@ class NotificationController extends Controller
     {
         //
         // Gate::authorize("view_notification", $notification);
+
+        $aggregations = $notification->aggregation()->get();
+        foreach ($aggregations as $aggregation) {
+            // $aggregation->infos=
+            $aggregation->produit_sante;
+        }
+
+        $notification->produits = $aggregations;
+        
         return $notification;
     }
 

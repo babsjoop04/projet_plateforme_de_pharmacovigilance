@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MessageHello;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -128,7 +130,7 @@ class AuthController extends Controller
                     'adresse_structure_travail' => 'nullable|max:255',
                     'role_utilisateur' => 'required',
                     'specilité' => 'nullable|max:255',
-                    'Est_point_focal' => 'required|boolean',//à supprimer
+                    'Est_point_focal' => 'required|boolean', //à supprimer
                     'district_localite' => 'nullable|max:255',
                     // region à revoir
                     'email' => 'required|email|unique:users',
@@ -152,15 +154,14 @@ class AuthController extends Controller
 
         $file = $request->file('files');
         if ($file) {
-           
+
 
             $fileName = date("Y_m_d_h_i_s") . '_' . $fields["nom"] . '_' . $fields["prenom"] . '.' . $file->getClientOriginalExtension();
             $file->storeAs('uploads', $fileName, "public");
-             $user->fichiersdemande()->create(["nom_fichiers" => $fileName]);
-
+            $user->fichiersdemande()->create(["nom_fichiers" => $fileName]);
         }
 
-        return[
+        return [
             "message" => "Demande d'inscription faite avec success",
         ];
     }
@@ -211,12 +212,16 @@ class AuthController extends Controller
 
         $token = $user->createToken($user->email)->plainTextToken;
 
+        Mail::to("executable20@gmail.com")->send(new MessageHello(["name"=>"babs"]));
+
+
         return [
             // "user" => $user,
             "token" => $token,
-            "role_utilisateur"=>$user->role_utilisateur,
-            "prenom"=>$user->prenom,
-            "nom"=>$user->nom,
+            "role_utilisateur" => $user->role_utilisateur,
+            "prenom" => $user->prenom,
+            "nom" => $user->nom,
+
 
         ];
     }
@@ -297,11 +302,9 @@ class AuthController extends Controller
         // Gate::authorize("gestion_utilisateur", $request->user());N
 
 
-        $users=User::where("statut", "attente_traitement")->get();
+        $users = User::where("statut", "attente_traitement")->get();
         // 
-        return $users->groupBy('role_utilisateur') ;
-
-      
+        return $users->groupBy('role_utilisateur');
     }
 
     public function index(Request $request)
@@ -315,11 +318,9 @@ class AuthController extends Controller
         // Gate::authorize("gestion_utilisateur", $request->user());N
 
 
-      
-        $users=User::whereNot("statut", "attente_traitement")->get();
+
+        $users = User::whereNot("statut", "attente_traitement")->get();
 
         return $users->groupBy('role_utilisateur');
-
-      
     }
 }

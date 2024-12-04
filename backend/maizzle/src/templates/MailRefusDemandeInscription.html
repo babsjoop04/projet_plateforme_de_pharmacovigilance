@@ -1,0 +1,87 @@
+---
+title: "Mail de refus de demande d'inscription"
+preheader: "Please confirm your email address in order to activate your account."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+
+    <div class="bg-gray-900  sm:px-4 font-sans">
+
+        <table align="center" class=" p-6  w-3/5">
+            <tr>
+                <td class="w-[552px] max-w-full">
+
+                    <table class="w-full">
+                        <tr>
+
+                            <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                                <div class="mb-10 text-center">
+                                    <img src="images/emails/logo.jpeg" class="w-17 object-cover  h-12 rounded-full" />
+
+                                    <h2 class="font-semibold  md:order-0 ">
+                                        Sama pharmacovigile
+                                    </h2>
+                                </div>
+                                <span class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+                                    Cher/Chère @{{$data["nom"]}},
+                                </span>
+
+                                <x-spacer height="15px" />
+                                <p class="m-0 leading-6">
+                                    Nous vous remercions d'avoir soumis une demande d'inscription sur notre plateforme
+                                    de pharmacovigilance. Après un examen attentif de votre dossier, nous sommes au
+                                    regret de vous informer que votre demande n'a pas pu être acceptée pour le moment.
+                                </p>
+
+                                <x-spacer height="24px" />
+
+
+                                <p class="m-0 leading-6">
+                                    Si vous souhaitez re-soumettre votre demande ou fournir des informations
+                                    complémentaires, nous vous invitons à suivre les étapes ci-dessous :
+                                <ul>
+                                    <li>Vérifiez vos informations et assurez-vous qu'elles sont complètes et conformes à
+                                        nos exigences
+                                    </li>
+                                    <li>Reprenez le processus d'inscription via ce lien : <a href="#">
+                                            www.samapharmacovigile.com/refus
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                </p>
+
+                                <x-spacer height="10px" />
+
+                                <p class="m-0 leading-6">
+                                    Pour toute question ou clarification, notre équipe reste à votre disposition. Vous pouvez nous contacter à l'adresse suivante : admin@samapharmacovigile.sn.
+                                    <br>
+                                    <br>
+                                    Nous vous remercions de votre compréhension et espérons pouvoir collaborer avec vous à l'avenir.
+                                </p>
+
+                                <x-divider space-y="32px" class="bg-slate-200" />
+
+
+                                <p class="m-0">
+                                    Cordialement,
+                                    <br>
+                                    Le service Support de " Sama pharmacovigile
+                                    "
+                                </p>
+                            </td>
+                        </tr>
+                        <tr role="separator">
+                            <td class="leading-12">&zwj;</td>
+                        </tr>
+
+
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</x-main>

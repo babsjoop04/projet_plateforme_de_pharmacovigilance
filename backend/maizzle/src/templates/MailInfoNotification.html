@@ -1,0 +1,106 @@
+---
+title: "Mail d'information de notification"
+preheader: "Please confirm your email address in order to activate your account."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+
+  <div class="bg-gray-900  sm:px-4 font-sans">
+
+    <table align="center" class=" p-6  w-3/5">
+      <tr>
+        <td class="w-[552px] max-w-full">
+
+          <table class="w-full">
+            <tr>
+              
+              <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                <div class="mb-10 text-center">
+                  <img src="images/emails/logo.jpeg" class="w-17 object-cover  h-12 rounded-full" />
+    
+                  <h2 class="font-semibold  md:order-0 ">
+                    Sama pharmacovigile
+                  </h2>
+                </div>
+                <span class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+                  Cher/Chère @{{$data["nom"]}},
+                </span>
+                
+                <x-spacer height="15px" />
+                <p class="m-0 leading-6">
+                  Nous vous confirmons la réception de votre notification concernant ce(s) produit(s) de santé
+                </p>
+
+                <x-spacer height="24px" />
+
+                <span class="m-0 mb-6 text-base sm:leading-8 text-black font-semibold">
+                  Détails de Votre Déclaration
+                </span>
+                <p class="m-0 leading-6">
+
+                <ul>
+                  <li>Numéro de référence : [NUMERO_REFERENCE]</li>
+                  <li>Date de déclaration : @{{$data["date_declaration"]}}</li>
+                </ul>
+
+                </p>
+                <!-- <x-spacer height="10px" /> -->
+                <span class="m-0 mb-6 text-base sm:leading-8 text-black font-semibold">
+                  Prochaines Étapes
+                </span>
+                <x-spacer height="10px" />
+
+                <p class="m-0 leading-6">
+                  Notre équipe examine actuellement votre signalement avec la plus grande
+                  attention. Nous vous contacterons dans un délai de 5 à 10 jours ouvrés si nous avons besoin
+                  d'informations complémentaires.
+                </p>
+
+                <x-spacer height="10px" />
+
+                <span class="m-0 mb-6 text-base sm:leading-8 text-black font-semibold">
+                  Informations Importantes
+                </span>
+
+                <!-- <x-spacer height="10px" /> -->
+
+                <span class="m-0 leading-6">
+                <ul>
+                  <li>
+                    Conservez votre numéro de référence pour tout suivi ultérieur</li>
+                  <li>
+                    Toutes les informations sont traitées de manière strictement confidentielle</li>
+                  <li>
+                    Votre contribution est essentielle à la sécurité des patients</li>
+                </ul>
+                </span>
+
+                <x-spacer height="10px" />
+
+              
+
+                <x-divider space-y="32px" class="bg-slate-200" />
+
+               
+                <p class="m-0">
+                  Cordialement,
+                  <br>
+                  Le service Support de " Sama pharmacovigilance
+                  "
+                </p>
+              </td>
+            </tr>
+            <tr role="separator">
+              <td class="leading-12">&zwj;</td>
+            </tr>
+
+
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</x-main>

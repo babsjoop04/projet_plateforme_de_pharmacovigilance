@@ -21,7 +21,7 @@ class Traitement extends Model
         return $this->belongsTo(User::class);
      }
      public function notification(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(Notification::class);
      }
 
      public function imputabilite(){

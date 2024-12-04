@@ -16,4 +16,8 @@ class Decision extends Model
     public function traitement(){
         return $this->hasOne(Traitement::class);
      }
+
+     public function user(){
+        return $this->belongsTo(User::class);
+     }
 }

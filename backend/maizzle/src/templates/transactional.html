@@ -1,0 +1,63 @@
+---
+title: "Confirm your email address"
+preheader: "Please confirm your email address in order to activate your account."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+
+ <div class="bg-gray-900  sm:px-4 font-sans">
+  
+    <table align="center" class=" p-6  w-3/5">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <div class="my-12 sm:my-8 text-center">
+            <!-- <a href="https://maizzle.com"> -->
+              
+                <!-- <img src="images/emails/logo.jpeg" class="w-17 object-cover  h-12 rounded-full" /> -->
+                
+                <h2 class="font-semibold  md:order-0 text-white">
+                  Sama pharmacovigile
+                </h2>
+              <!-- </div> -->
+            <!-- </a> -->
+          </div>
+
+          <table class="w-full">
+            <tr>
+              <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+                  Bonjour @{{$data["name"]}},
+                </h1>
+
+                <p class="m-0 leading-6">
+                  Nous vous remercions de votre inscription sur notre plateforme de pharmacovigilance.
+                </p>
+
+                <x-spacer height="24px" />
+
+                <x-button href="http://localhost:5173/login">
+                  Confirm email address &rarr;
+                </x-button>
+
+                <x-divider space-y="32px" class="bg-slate-200" />
+
+                <p class="m-0">
+                  If you didn't sign up for Maizzle, you can safely ignore this email.
+                  <br>
+                  <br>
+                  Thanks, <br />The Maizzle Team
+                </p>
+              </td>
+            </tr>
+            <tr role="separator">
+              <td class="leading-12">&zwj;</td>
+            </tr>
+            
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+</x-main>

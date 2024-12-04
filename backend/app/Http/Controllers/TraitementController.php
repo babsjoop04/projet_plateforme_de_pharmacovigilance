@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Traitement;
 use App\Http\Requests\StoreTraitementRequest;
 use App\Http\Requests\UpdateTraitementRequest;
+use App\Models\Decision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,6 +19,44 @@ class TraitementController extends Controller
         // Gate::authorize("view_any_notification", $request->user());
         
         return Traitement::all();
+    }
+
+    public function getTraitementsFinis()
+    {
+        // Gate::authorize("view_any_notification", $request->user());
+
+        $decisions = Decision::pluck('traitement_id')->all();
+        $traitements = Traitement::whereIn("id", $decisions)->get();
+    
+
+        foreach ($traitements as $traitement) {
+
+            // $traitement["type_notification"]=
+            $traitement->notification;
+            $traitement->decision;
+
+        }
+        return $traitements;
+        
+        // return Traitement::all();
+    }
+
+    public function getTraitementsActifs()
+    {
+        // Gate::authorize("view_any_notification", $request->user());
+
+        $decisions = Decision::pluck('traitement_id')->all();
+        $traitements = Traitement::whereNotIn("id", $decisions)->get();
+
+        foreach ($traitements as $traitement) {
+
+            // $traitement["type_notification"]=
+            $traitement->notification;
+        }
+    
+        return $traitements;
+        
+        // return Traitement::all();
     }
 
     /**
@@ -73,7 +112,7 @@ class TraitementController extends Controller
         // Gate::authorize("view_any_notification", $request->user());
         $fields=$request->validate([
             // "user_id"=> 'required',
-            "notification_id"=> 'required|unique',
+            // "notification_id"=> 'required|unique',
             "necessite_imputabilite"=> 'required',
             // "resultat_imputabilite"=> 'nullable',
             "statut_traitement"=> 'required',

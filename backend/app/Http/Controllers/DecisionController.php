@@ -11,12 +11,21 @@ class DecisionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return Decision::all();
+        // $decisions = $request->user()->decision()->get();
+        $decisions = Decision::all();
+
+        foreach ($decisions as $decision) {
+
+            // $notification->aggregation()->create($produit_sante);
+        }
+
+
+        return $decisions;
     }
-   
+
 
 
 
@@ -26,16 +35,16 @@ class DecisionController extends Controller
     public function store(Request $request)
     {
         //
-        $fields=$request->validate(rules: [
-            "traitement_id"=> 'required',
-            "decision"=> 'required|in:suspension_AMM,retrait_AMM,rappel_lot,mise_en_quarantaine,restriction_utlisation_prescription,demande_modification_informations,changement_liste,reevaluation_rapport_benefice_risque',
+        $fields = $request->validate(rules: [
+            "traitement_id" => 'required',
+            "decision" => 'required|in:suspension_AMM,retrait_AMM,rappel_lot,mise_en_quarantaine,restriction_utlisation_prescription,demande_modification_informations,changement_liste,reevaluation_rapport_benefice_risque',
         ]);
 
-        $traitement=Traitement::find($request->traitement_id);
+        $traitement = Traitement::find($request->traitement_id);
         $traitement->decision()->create($fields);
 
         return [
-            'message'=> 'Decision créé avec success',
+            'message' => 'Decision créé avec success',
         ];
     }
 
@@ -54,15 +63,15 @@ class DecisionController extends Controller
     public function update(Request $request, Decision $decision)
     {
         //
-        $fields=$request->validate([
-            "traitement_id"=> 'required',
-            "decision"=> 'required|in:suspension_AMM,retrait_AMM,rappel_lot,mise_en_quarantaine,restriction_utlisation_prescription,demande_modification_informations,changement_liste,reevaluation_rapport_benefice_risque',
+        $fields = $request->validate([
+            "traitement_id" => 'required',
+            "decision" => 'required|in:suspension_AMM,retrait_AMM,rappel_lot,mise_en_quarantaine,restriction_utlisation_prescription,demande_modification_informations,changement_liste,reevaluation_rapport_benefice_risque',
         ]);
 
         $decision->update($fields);
 
         return [
-            'message'=> 'Decision mise à jour avec success',
+            'message' => 'Decision mise à jour avec success',
         ];
     }
 
@@ -74,7 +83,7 @@ class DecisionController extends Controller
         //
         $decision->delete();
         return [
-            'message'=> 'Decision supprimée avec success'
+            'message' => 'Decision supprimée avec success'
         ];
     }
 }

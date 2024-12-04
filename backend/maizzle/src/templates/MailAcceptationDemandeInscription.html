@@ -1,0 +1,84 @@
+---
+title: "Mail d'accpetation de demande d'inscription"
+preheader: "Please confirm your email address in order to activate your account."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+
+    <div class="bg-gray-900  sm:px-4 font-sans">
+
+        <table align="center" class=" p-6  w-3/5">
+            <tr>
+                <td class="w-[552px] max-w-full">
+
+                    <table class="w-full">
+                        <tr>
+
+                            <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                                <div class="mb-10 text-center">
+                                    <img src="images/emails/logo.jpeg" class="w-17 object-cover  h-12 rounded-full" />
+
+                                    <h2 class="font-semibold  md:order-0 ">
+                                        Sama pharmacovigile
+                                    </h2>
+                                </div>
+                                <span class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+                                    Cher/Chère @{{$data["nom"]}},
+                                </span>
+
+                                <x-spacer height="15px" />
+                                <p class="m-0 leading-6">
+                                    Nous sommes ravis de vous annoncer que votre inscription sur notre plateforme a été
+                                    acceptée avec succès. 🎉</p>
+
+                                <x-spacer height="24px" />
+
+
+                                <p class="m-0 leading-6">
+                                    Vous pouvez désormais accéder à votre compte en utilisant les identifiants que vous
+                                    avez fournis lors de votre inscription. Voici quelques informations utiles pour bien
+                                    commencer :
+                                <ul>
+                                    <li>Guide utilisateur :
+                                        <a href="#">
+                                            www.samapharmacovigile.com/guide
+                                        </a>
+                                    </li>
+                                    <li>Support : Si vous avez des questions, notre équipe est disponible pour vous
+                                        accompagner
+                                    </li>
+                                </ul>
+
+                                </p>
+                                
+                                <x-spacer height="10px" />
+
+                                <p class="m-0 leading-6">
+                                    Votre participation à notre plateforme est essentielle pour améliorer la sécurité des médicaments et renforcer la pharmacovigilance.
+                                </p>
+
+                                <x-divider space-y="32px" class="bg-slate-200" />
+
+
+                                <p class="m-0">
+                                    Cordialement,
+                                    <br>
+                                    Le service Support de " Sama pharmacovigile
+                                    "
+                                </p>
+                            </td>
+                        </tr>
+                        <tr role="separator">
+                            <td class="leading-12">&zwj;</td>
+                        </tr>
+
+
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</x-main>

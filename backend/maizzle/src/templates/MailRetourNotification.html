@@ -1,0 +1,120 @@
+---
+title: "Feedback"
+preheader: "Please confirm your email address in order to activate your account."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+
+    <div class="bg-gray-900  sm:px-4 font-sans">
+
+        <table align="center" class=" p-6  w-3/5">
+            <tr>
+                <td class="w-[552px] max-w-full">
+
+                    <table class="w-full">
+                        <tr>
+
+                            <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                                <div class="mb-10 text-center">
+                                    <img src="images/emails/logo.jpeg" class="w-17 object-cover  h-12 rounded-full" />
+
+                                    <h2 class="font-semibold  md:order-0 ">
+                                        Sama pharmacovigile
+                                    </h2>
+                                </div>
+                                <span class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+                                    Cher/Chère @{{$data["nom"]}},
+                                </span>
+
+                                <x-spacer height="15px" />
+                                <p class="m-0 leading-6">
+                                    Nous vous remercions d’avoir pris le temps de signaler un événement ou un effet
+                                    indésirable via notre plateforme de pharmacovigilance. Votre notification a été
+                                    soigneusement examinée par notre équipe d’experts.
+                                </p>
+
+
+                                <x-spacer height="24px" />
+
+                                <span class="m-0 mb-6 text-base sm:leading-8 text-black font-semibold">
+                                    Détails de Votre Déclaration
+                                </span>
+                                <p class="m-0 leading-6">
+
+                                <ul>
+                                    <li>Numéro de référence : [NUMERO_REFERENCE]</li>
+                                    <li>Type de notification : [NUMERO_REFERENCE]</li>
+                                    <li>Date de notification : @{{$data["date_declaration"]}}</li>
+                                </ul>
+
+                                </p>
+                                <!-- <x-spacer height="10px" /> -->
+                                <span class="m-0 mb-6 text-base sm:leading-8 text-black font-semibold">
+                                    Décision Finale
+                                </span>
+                                <x-spacer height="10px" />
+
+                                <p class="m-0 leading-6">
+                                    Après analyse approfondie de votre signalement, notre comité de pharmacovigilance a
+                                    pris la décision suivante :
+                                    <span class="text-base  text-black font-semibold">
+                                        @{{$data["decision"]}}
+                                    </span>
+                                </p>
+
+                                <x-spacer height="15px" />
+
+                                <span class="m-0 mb-6 text-base sm:leading-8 text-black font-semibold">
+                                    Informations supplementaires
+                                </span>
+
+                                <x-spacer height="10px" />
+
+                                <if condition="@{{$data['decision']}} === 'node'">
+                                    <p class="m-0 leading-6">
+                                        Info supplementaire
+                                    </p>
+                                </if>
+                                <elseif condition="@{{$data['name']}} === 'node'">
+                                    <p class="m-0 leading-6">
+                                        Info supplementaire
+                                    </p>
+                                </elseif>
+                                <elseif condition="@{{$data['name']}} === 'node'">
+                                    <p class="m-0 leading-6">
+                                        Info supplementaire
+                                    </p>
+                                </elseif>
+
+
+
+                                <x-divider space-y="32px" class="bg-slate-200" />
+
+                                <p class="mb-4 leading-6">
+                                    Nous vous assurons que votre contribution joue un rôle essentiel dans l’amélioration
+                                    de la sécurité des produits de santé et dans la protection des patients.
+
+                                </p>
+
+                                <p class="m-0">
+                                    Cordialement,
+                                    <br>
+                                    Le service Support de " Sama pharmacovigilance
+                                    "
+                                </p>
+                            </td>
+                        </tr>
+                        <tr role="separator">
+                            <td class="leading-12">&zwj;</td>
+                        </tr>
+
+
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</x-main>

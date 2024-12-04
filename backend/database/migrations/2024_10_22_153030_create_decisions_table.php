@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('decisions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('traitement_id')->unique()->constrained();
+            $table->foreignId('user_id')->constrained();
+
             $table->enum('decision',["suspension_AMM","retrait_AMM","rappel_lot","mise_en_quarantaine","restriction_utlisation_prescription","demande_modification_informations","changement_liste","reevaluation_rapport_benefice_risque"]);
             $table->timestamps();
         });
