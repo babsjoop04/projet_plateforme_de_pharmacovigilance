@@ -44,7 +44,7 @@ bodyClass: bg-slate-50
 
                                 <ul>
                                     <li>Numéro de référence : [NUMERO_REFERENCE]</li>
-                                    <li>Type de notification : [NUMERO_REFERENCE]</li>
+                                    <li>Type de notification : @{{$data["type_notification"]}}</li>
                                     <li>Date de notification : @{{$data["date_declaration"]}}</li>
                                 </ul>
 
@@ -59,7 +59,7 @@ bodyClass: bg-slate-50
                                     Après analyse approfondie de votre signalement, notre comité de pharmacovigilance a
                                     pris la décision suivante :
                                     <span class="text-base  text-black font-semibold">
-                                        @{{$data["decision"]}}
+                                        Suspension d'AMM
                                     </span>
                                 </p>
 
@@ -70,24 +70,6 @@ bodyClass: bg-slate-50
                                 </span>
 
                                 <x-spacer height="10px" />
-
-                                <if condition="@{{$data['decision']}} === 'node'">
-                                    <p class="m-0 leading-6">
-                                        Info supplementaire
-                                    </p>
-                                </if>
-                                <elseif condition="@{{$data['name']}} === 'node'">
-                                    <p class="m-0 leading-6">
-                                        Info supplementaire
-                                    </p>
-                                </elseif>
-                                <elseif condition="@{{$data['name']}} === 'node'">
-                                    <p class="m-0 leading-6">
-                                        Info supplementaire
-                                    </p>
-                                </elseif>
-
-
 
                                 <x-divider space-y="32px" class="bg-slate-200" />
 

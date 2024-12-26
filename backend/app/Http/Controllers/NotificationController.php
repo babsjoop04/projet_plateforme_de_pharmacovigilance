@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailInfoNotification;
 use App\Models\Notification;
 use App\Models\Aggregation_notification_produit_sante;
 use App\Models\Traitement;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 // use App\Http\Requests\StoreNotificationRequest;
 // use App\Http\Requests\UpdateNotificationRequest;
@@ -84,7 +86,7 @@ class NotificationController extends Controller
         //         break;
         // }
 
-
+        $user=$request->user();
 
 
         if ($request->type_notification === "notification_pqif") {
@@ -125,7 +127,7 @@ class NotificationController extends Controller
                 "date_peremption" => 'required|date',
             ]);
 
-            $notification = $request->user()->notification()->create($fields);
+            $notification = $user->notification()->create($fields);
             // return $notification;
             $notification->aggregation()->create($fields_aggregation);
 
@@ -205,12 +207,15 @@ class NotificationController extends Controller
 
             // return $fields_aggregation;
 
-            $notification = $request->user()->notification()->create($fields);
+            $notification = $user->notification()->create($fields);
 
             foreach ($request->infos_produits_santes as $produit_sante) {
 
                 $notification->aggregation()->create($produit_sante);
             }
+
+            Mail::to($user["email"])->send(new MailInfoNotification(["nom"=>$user["prenom"]." ".$user["nom"],"date_declaration"=>$notification["created_at"]]));
+
 
             return [
                 "message" => "Notification faite avec success",

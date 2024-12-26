@@ -1,0 +1,84 @@
+---
+title: "Mail de desactivation de compte"
+preheader: "Please confirm your email address in order to activate your account."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+
+    <div class="bg-gray-900  sm:px-4 font-sans">
+
+        <table align="center" class=" p-6  w-3/5">
+            <tr>
+                <td class="w-[552px] max-w-full">
+
+                    <table class="w-full">
+                        <tr>
+
+                            <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                                <div class="mb-10 text-center">
+                                    <img src="@{{url('/images/emails/logo.png')}}"  class="w-17 object-cover  h-12 rounded-full" />
+
+                                    <h2 class="font-semibold  md:order-0 ">
+                                        Sama pharmacovigile
+                                    </h2>
+                                </div>
+                                <span class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+                                    Cher/Chère @{{$data["nom"]}},
+                                </span>
+
+                                <x-spacer height="15px" />
+                                <p class="m-0 leading-6">
+                                    Nous vous informons que votre compte sur notre plateforme de pharmacovigilance a été
+                                    désactivé à partir du [date de désactivation]. Cette désactivation peut avoir été
+                                    effectuée pour l’une des raisons suivantes :
+
+                                <ul>
+
+                                    <li>Une inactivité prolongée sur la plateforme.
+                                    </li>
+                                    <li>Une non-conformité aux conditions d’utilisation.
+                                    </li>
+                                </ul>
+
+
+
+                                </p>
+
+                                <x-spacer height="10px" />
+
+
+                                <p class="m-0 leading-6">
+                                    Si vous souhaitez réactiver votre compte ou obtenir plus de détails sur cette
+                                    désactivation, nous vous invitons à nous contacter à admin@samapharmacovigile.sn. Notre
+                                    équipe se tient à votre disposition pour répondre à vos questions ou vous guider
+                                    dans les étapes à suivre.
+                                    <x-spacer height="10px" />
+                                    Nous vous remercions pour votre compréhension et espérons pouvoir vous accueillir à
+                                    nouveau prochainement.
+                                </p>
+
+                                <x-divider space-y="32px" class="bg-slate-200" />
+
+
+                                <p class="m-0">
+                                    Cordialement,
+                                    <br>
+                                    Le service Support de " Sama pharmacovigile
+                                    "
+                                </p>
+                            </td>
+                        </tr>
+                        <tr role="separator">
+                            <td class="leading-12">&zwj;</td>
+                        </tr>
+
+
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</x-main>

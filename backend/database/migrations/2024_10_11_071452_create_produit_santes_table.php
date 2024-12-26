@@ -30,7 +30,9 @@ return new class extends Migration
             $table->string('laboratoire');
             $table->string('voie_administration');
             $table->string('classe_thérapeutique');
-            // $table->string('notice');
+            $table->string('notice')->nullable();
+            $table->string('img_produit')->nullable();
+
 
 
 

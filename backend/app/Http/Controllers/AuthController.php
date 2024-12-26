@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailAcceptationDemandeInscription;
+use App\Mail\MailBienvenue;
+use App\Mail\MailDemandeInscription;
+use App\Mail\MailDesactivationCompte;
+use App\Mail\MailReactivationCompte;
+use App\Mail\MailRefusDemandeInscription;
 use App\Mail\MessageHello;
 use App\Models\User;
 use DateTime;
@@ -49,6 +55,9 @@ class AuthController extends Controller
 
                 $user = User::create($fields);
 
+                Mail::to($user["email"])->send(new MailBienvenue(["nom" => $user["prenom"] . " " . $user["nom"]]));
+
+
 
 
 
@@ -77,7 +86,7 @@ class AuthController extends Controller
                     'role_utilisateur' => 'required',
                     'email' => 'required|email|unique:users',
                     'password' => 'required|confirmed',
-                    'files' => 'required|file|mimes:zip',
+                    // 'files' => 'required|file|mimes:zip',
                 ]);
 
 
@@ -105,7 +114,7 @@ class AuthController extends Controller
                     'specilité' => 'nullable|max:255',
                     'email' => 'required|email|unique:users',
                     'password' => 'required|confirmed',
-                    'files' => 'required|file|mimes:zip',
+                    // 'files' => 'required|file|mimes:zip',
 
                 ]);
 
@@ -130,12 +139,12 @@ class AuthController extends Controller
                     'adresse_structure_travail' => 'nullable|max:255',
                     'role_utilisateur' => 'required',
                     'specilité' => 'nullable|max:255',
-                    'Est_point_focal' => 'required|boolean', //à supprimer
+                    'Est_point_focal' => 'nullable|boolean', //à supprimer
                     'district_localite' => 'nullable|max:255',
                     // region à revoir
                     'email' => 'required|email|unique:users',
                     'password' => 'required|confirmed',
-                    //  'files' => 'required|file|mimes:zip',
+                    // 'files' => 'required|file|mimes:zip',
 
                 ]);
                 // return [
@@ -151,15 +160,19 @@ class AuthController extends Controller
 
 
         $user = User::create($fields);
+     
 
         $file = $request->file('files');
         if ($file) {
 
 
-            $fileName = date("Y_m_d_h_i_s") . '_' . $fields["nom"] . '_' . $fields["prenom"] . '.' . $file->getClientOriginalExtension();
+            $fileName =  "demande_inscription" . '_' . $fields["email"]  . '.' . $file->getClientOriginalExtension();
             $file->storeAs('uploads', $fileName, "public");
             $user->fichiersdemande()->create(["nom_fichiers" => $fileName]);
         }
+
+        Mail::to($user["email"])->send(new MailDemandeInscription(["nom" => $user["prenom"] . " " . $user["nom"]]));
+
 
         return [
             "message" => "Demande d'inscription faite avec success",
@@ -212,7 +225,7 @@ class AuthController extends Controller
 
         $token = $user->createToken($user->email)->plainTextToken;
 
-        Mail::to("executable20@gmail.com")->send(new MessageHello(["name"=>"babs"]));
+        // Mail::to("executable20@gmail.com")->send(new MessageHello(["name" => "babs"]));
 
 
         return [
@@ -245,6 +258,8 @@ class AuthController extends Controller
 
         $user = User::where("email", $request->email_utilisateur)->first();
 
+
+
         if (!$user) {
             return [
                 "error" => [
@@ -259,29 +274,49 @@ class AuthController extends Controller
 
             $user->update([$user]);
 
+
+            Mail::to($user["email"])->send(new MailRefusDemandeInscription(["nom" => $user["prenom"] . " " . $user["nom"]]));
+
+
             return [
                 "message" => "Demande refusée avec succes"
             ];
-        }
-
-        if (in_array($request->decision, ["reactivation_compte", "demande_inscription_acceptée"])) {
+        } elseif ($request->decision === "reactivation_compte") {
 
             $user["statut"] = "activé";
 
             $user->update([$user]);
+
+            Mail::to($user["email"])->send(new MailReactivationCompte(["nom" => $user["prenom"] . " " . $user["nom"]]));
+
+
+            return [
+                "message" => "Compte réactivé avec succes"
+            ];
+
+            //  return $user;
+        } elseif ($request->decision === "demande_inscription_acceptée") {
+
+            $user["statut"] = "activé";
+
+            $user->update([$user]);
+
+            Mail::to($user["email"])->send(new MailAcceptationDemandeInscription(["nom" => $user["prenom"] . " " . $user["nom"]]));
+
 
             return [
                 "message" => "Compte activé avec succes"
             ];
 
             //  return $user;
-        }
-
-        if ($request->decision === "desactivation_compte") {
+        } elseif ($request->decision === "desactivation_compte") {
 
             $user["statut"] = "desactivé";
 
             $user->update([$user]);
+
+            Mail::to($user["email"])->send(new MailDesactivationCompte(["nom" => $user["prenom"] . " " . $user["nom"]]));
+
 
             return [
                 "message" => "Compte desactivé avec succes"

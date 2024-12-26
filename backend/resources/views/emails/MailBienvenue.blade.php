@@ -19,7 +19,7 @@
     td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-line-height-rule: exactly;}
   </style>
   <![endif]-->
-  <title>Feedback</title>
+  <title>Mail de beinvenue</title>
   <style>
     @media (max-width: 600px) {
       .sm-px-4 {
@@ -41,7 +41,7 @@
     Please confirm your email address in order to activate your account.
     &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847;
   </div>
-  <div role="article" aria-roledescription="email" aria-label="Feedback" lang="en">
+  <div role="article" aria-roledescription="email" aria-label="Mail de beinvenue" lang="en">
     <div class="sm-px-4" style="background-color: #111827; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
       <table align="center" style="width: 60%; padding: 24px" cellpadding="0" cellspacing="0" role="none">
         <tr>
@@ -60,42 +60,22 @@
                                 </span>
                   <div role="separator" style="line-height: 15px">&zwj;</div>
                   <p style="margin: 0; line-height: 24px">
-                    Nous vous remercions d’avoir pris le temps de signaler un événement ou un effet
-                    indésirable via notre plateforme de pharmacovigilance. Votre notification a été
-                    soigneusement examinée par notre équipe d’experts.
-                  </p>
-                  <div role="separator" style="line-height: 24px">&zwj;</div> <span class="sm-leading-8" style="margin: 0 0 24px; font-size: 16px; font-weight: 600; color: #000001">
-                                    Détails de Votre Déclaration
-                                </span>
-                  <p style="margin: 0; line-height: 24px;"> </p>
-                  <ul>
-                    <li>Numéro de référence : [NUMERO_REFERENCE]</li>
-                    <li>Type de notification : {{$data["type_notification"]}}</li>
-                    <li>Date de notification : {{$data["date_declaration"]}}</li>
-                  </ul>
-                  <p></p> <span class="sm-leading-8" style="margin: 0 0 24px; font-size: 16px; font-weight: 600; color: #000001">
-                                    Décision Finale
-                                </span>
-                  <div role="separator" style="line-height: 10px">&zwj;</div>
+                    Félicitations! Votre compte a été créé avec succès, et nous sommes ravis de vous
+                    accueillir sur notre plateforme de pharmacovigilance.</p>
+                  <div role="separator" style="line-height: 24px">&zwj;</div>
                   <p style="margin: 0; line-height: 24px;">
-                    Après analyse approfondie de votre signalement, notre comité de pharmacovigilance a
-                    pris la décision suivante :
-                    <span style="font-size: 16px; font-weight: 600; color: #000001;">
-                                        Suspension d'AMM
-                                    </span>
-                  </p>
-                  <div role="separator" style="line-height: 15px">&zwj;</div> <span class="sm-leading-8" style="margin: 0 0 24px; font-size: 16px; font-weight: 600; color: #000001">
-                                    Informations supplementaires
-                                </span>
-                  <div role="separator" style="line-height: 10px">&zwj;</div>
+                    Votre engagement contribue à renforcer la sécurité des médicaments et à protéger la
+                    santé publique. Nous vous remercions pour votre participation active dans cette
+                    mission importante. </p>
+                  <div role="separator" style="line-height: 10px">&zwj;</div> Si vous avez des questions ou besoin d’aide, notre équipe est là pour vous. Vous
+                  pouvez nous écrire à admin@samapharmacovigile.sn ou consulter notre centre d’aide :
+                  <a href="#">www.samapharmacovigile.sn/aide</a>. <div role="separator" style="line-height: 10px">&zwj;</div> Encore une fois, bienvenue parmi nous! Nous sommes impatients de collaborer avec
+                  vous. <p></p>
                   <div role="separator" style="height: 1px; line-height: 1px; margin: 32px 0; background-color: #e2e8f0">&zwj;</div>
-                  <p style="margin-bottom: 16px; line-height: 24px">
-                    Nous vous assurons que votre contribution joue un rôle essentiel dans l’amélioration
-                    de la sécurité des produits de santé et dans la protection des patients. </p>
                   <p style="margin: 0;">
                     Cordialement,
                     <br>
-                    Le service Support de " Sama pharmacovigilance
+                    Le service Support de " Sama pharmacovigile
                     "
                   </p>
                 </td>

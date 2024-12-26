@@ -93,6 +93,6 @@ class User extends Authenticatable
      }
 
      public function fichiersdemande(){
-        return $this->hasOne(FichiersDemandes::class);
+        return $this->hasMany(FichiersDemandes::class);
      }
 }

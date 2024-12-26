@@ -41,6 +41,7 @@ class DecisionController extends Controller
         ]);
 
         $traitement = Traitement::find($request->traitement_id);
+        
         $traitement->decision()->create($fields);
 
         return [

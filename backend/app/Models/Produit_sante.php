@@ -23,7 +23,8 @@ class Produit_sante extends Model
         'laboratoire',
         'voie_administration',
         'classe_thérapeutique',
-        // 'notice',
+        'notice',
+        "img_produit"
 
     ];
 

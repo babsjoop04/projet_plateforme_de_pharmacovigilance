@@ -6,6 +6,7 @@ use App\Models\FichiersDemandes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class FichiersDemandesController extends Controller
@@ -45,28 +46,32 @@ class FichiersDemandesController extends Controller
     public function download(Request $request)
 
     {
+
+
         // FichiersDemandes $fichiersDemandes
         //
+        $user = User::where('email', $request->email)->first();
 
-        $fichiersDemandes=FichiersDemandes::where("nom_fichiers",$request->nom_fichiers)->first();
-        // return $fichiersDemandes->user;
-        if (!$fichiersDemandes) {
+
+        $fichier = $user->fichiersdemande()->whereLike("nom_fichiers",$request->type."%")->first();
+
+        // return $fichiers;
+
+        if (!$fichier) {
 
             return [
-                "error"=> [
-                    "enregistrement"=> "Aucun enregistrement ne correspond",
+                "error" => [
+                    "enregistrement" => "Aucun enregistrement ne correspond",
                 ]
             ];
         }
-        // return $fichiersDemandes;
 
 
-        // return file_exists(public_path("storage/uploads/{$fichiersDemandes->nom_fichiers}"));
 
-        
-        $link=public_path("storage/uploads/{$fichiersDemandes->nom_fichiers}");
+        $link = public_path("storage/uploads/{$fichier->nom_fichiers}");
         if (file_exists($link)) {
-            return response()->download($link, $fichiersDemandes->nom_fichiers);
+
+            return response()->download($link, $fichier->nom_fichiers,['X-Filename'=> $fichier->nom_fichiers]);
             // return "fichier trouvé";
         } else {
 

@@ -68,7 +68,7 @@
                   <p style="margin: 0; line-height: 24px;"> </p>
                   <ul>
                     <li>Numéro de référence : [NUMERO_REFERENCE]</li>
-                    <li>Date de déclaration : {{$data["date_declaration"]}}</li>
+                    <li>Date de déclaration : {{date_format($data["date_declaration"],"d/m/Y à H:i:s")}}</li>
                   </ul>
                   <p></p> <span class="sm-leading-8" style="margin: 0 0 24px; font-size: 16px; font-weight: 600; color: #000001">
                   Prochaines Étapes

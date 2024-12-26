@@ -41,7 +41,7 @@ bodyClass: bg-slate-50
 
                 <ul>
                   <li>Numéro de référence : [NUMERO_REFERENCE]</li>
-                  <li>Date de déclaration : @{{$data["date_declaration"]}}</li>
+                  <li>Date de déclaration : @{{date_format($data["date_declaration"],"d/m/Y à H:i:s")}}</li>
                 </ul>
 
                 </p>

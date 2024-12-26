@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('district_localite')->nullable();
 
             $table->string('email')->unique();
+            // $table->timestamps('email_verify_at');
+
             $table->string('password');
             $table->enum('statut',["attente_traitement","demande_refusée","activé","desactivé"]);
             // ->default("attente_activation")

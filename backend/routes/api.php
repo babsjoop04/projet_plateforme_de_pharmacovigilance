@@ -34,19 +34,22 @@ Route::middleware( 'auth:sanctum')->group(function () {
     Route::apiResource("imputabilite",ImputabiliteController::class);
     Route::apiResource("decision",DecisionController::class);
     Route::get("/produit/rechercher", [ProduitSanteController::class,"rechercher"]);
+    Route::get("/produit/notice/download", [ProduitSanteController::class,"downloadNotice"]);
+
     // Route::get("/produit/{produit}", [ProduitSanteController::class,"show"]);
 
     Route::apiResource("produit",ProduitSanteController::class);
 
     
     Route::get("/utilisateurs", [AuthController::class,"index"]);
+
+    Route::post("/utilisateur/gestion", [AuthController::class,"gerer_utilisateur"]);
+    Route::get("/utilisateur/demandes", [AuthController::class,"getDemande"]);
+    Route::get("/utilisateur/demande/fichiers_demande/download", [FichiersDemandesController::class,"download"]);
 });
 
 
-Route::post("/utilisateur/gestion", [AuthController::class,"gerer_utilisateur"]);
-Route::get("/utilisateur/demandes", [AuthController::class,"getDemande"]);
 
 
-Route::get("/download", [FichiersDemandesController::class,"download"]);
 Route::get("/fichiers_demandes", [FichiersDemandesController::class,"index"]);
 
